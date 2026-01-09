@@ -11,7 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useFirebase } from '@/firebase';
 import { collection } from 'firebase/firestore';
 import { addDocumentNonBlocking } from '@/firebase/non-blocking-updates';
-import { sendContactEmail } from '@/ai/flows/send-contact-email';
+// Use API route for email sending in production
 import { DialogContent, DialogHeader, DialogTitle, DialogClose } from '../ui/dialog';
 import { Car, BadgeIndianRupee, PhoneCall, X } from 'lucide-react';
 
@@ -57,14 +57,19 @@ export function BrochurePopup() {
       console.warn("Firestore is not available. Skipping database submission.");
     }
     
-    // 2. Send email via Genkit flow
-    const emailResult = await sendContactEmail({
-      name: data.name,
-      email: data.email,
-      phone: data.mobile,
-      comment: data.comment,
-      formType: 'Brochure Download',
+    // 2. Send email via API route
+    const res = await fetch('/api/contact-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+        phone: data.mobile,
+        comment: data.comment,
+        formType: 'Brochure Download',
+      }),
     });
+    const emailResult = await res.json();
 
     if (emailResult.success) {
         toast({
