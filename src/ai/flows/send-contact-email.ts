@@ -53,7 +53,7 @@ const sendContactEmailFlow = ai.defineFlow(
         from: fromEmail,
         to: primaryTo,
         cc: ccRecipients.length ? ccRecipients : undefined,
-        replyTo: input.email,
+        reply_to: input.email,
         subject: `Sobha Hoskote Lead via Blowkida - ${input.formType}`,
         html: `
           <h1>New Form Submission</h1>
