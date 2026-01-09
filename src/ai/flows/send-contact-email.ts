@@ -46,8 +46,7 @@ const sendContactEmailFlow = ai.defineFlow(
     // Prefer sending directly to manishants, and CC any others for reliability.
     const primaryTo = recipients.find((e) => e.toLowerCase() === 'manishants@gmail.com') ?? recipients[0];
     const ccRecipients = recipients.filter((e) => e !== primaryTo);
-    const fromPrimary = process.env.FROM_EMAIL_ADDRESS || 'Sobha Leads <leads@sobhahoskote.online>';
-    const fromFallback = 'Sobha Hoskote Lead <onboarding@resend.dev>';
+    const fromEmail = 'Sobha Leads <leads@sobhahoskote.online>';
 
     try {
       const payload = {
@@ -67,47 +66,14 @@ const sendContactEmailFlow = ai.defineFlow(
         text: `New Form Submission\nForm: ${input.formType}\nName: ${input.name}\nEmail: ${input.email}\n${input.phone ? `Phone: ${input.phone}\n` : ''}${input.message ? `Message: ${input.message}\n` : ''}${input.comment ? `Comment: ${input.comment}\n` : ''}`,
       };
 
-      // First attempt: use primary (custom) sender.
-      await resend.emails.send({ from: fromPrimary, ...payload });
+      await resend.emails.send({ from: fromEmail, ...payload });
 
       console.log('Email sent successfully!');
       return { success: true, message: 'Email sent successfully.' };
 
     } catch (error) {
       console.error('Failed to send email:', error);
-      const msg = (error as any)?.message ? String((error as any).message) : String(error);
-      const domainIssue = /domain/i.test(msg) && /verify|verified|authentication|dkim|spf/i.test(msg);
-
-      // If domain verification blocks sends, fall back to Resend's default onboarding sender.
-      if (domainIssue) {
-        try {
-          console.warn('Retrying with fallback sender due to domain verification issue.');
-          const payload = {
-            to: primaryTo,
-            cc: ccRecipients.length ? ccRecipients : undefined,
-            reply_to: input.email,
-            subject: `Sobha Hoskote Lead via Blowkida - ${input.formType}`,
-            html: `
-              <h1>New Form Submission</h1>
-              <p><strong>Form:</strong> ${input.formType}</p>
-              <p><strong>Name:</strong> ${input.name}</p>
-              <p><strong>Email:</strong> ${input.email}</p>
-              ${input.phone ? `<p><strong>Phone:</strong> ${input.phone}</p>` : ''}
-              ${input.message ? `<p><strong>Message:</strong> ${input.message}</p>` : ''}
-              ${input.comment ? `<p><strong>Comment:</strong> ${input.comment}</p>` : ''}
-            `,
-            text: `New Form Submission\nForm: ${input.formType}\nName: ${input.name}\nEmail: ${input.email}\n${input.phone ? `Phone: ${input.phone}\n` : ''}${input.message ? `Message: ${input.message}\n` : ''}${input.comment ? `Comment: ${input.comment}\n` : ''}`,
-          };
-          await resend.emails.send({ from: fromFallback, ...payload });
-          console.log('Email sent successfully via fallback sender.');
-          return { success: true, message: 'Email sent successfully (fallback sender).' };
-        } catch (fallbackError) {
-          console.error('Fallback sender also failed:', fallbackError);
-          return { success: false, message: 'Failed to send email (domain not verified).' };
-        }
-      }
-
-      // Other errors: treat as failure so UI can reflect issue.
+      // Treat as failure so UI can reflect issue.
       return { success: false, message: 'Failed to send email.' };
     }
   }
