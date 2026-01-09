@@ -43,48 +43,48 @@ export function Hero() {
       <div className="relative z-10 container mx-auto px-4 w-full">
         
         <div className="bg-background/80 backdrop-blur-sm text-foreground p-6 md:p-8 rounded-lg max-w-lg shadow-2xl shadow-black/30">
-            <p className="text-sm font-semibold uppercase tracking-wider text-primary">Booking Open</p>
+            <p className="text-sm font-semibold uppercase tracking-wider text-primary">Booking Open for EOI</p>
             <h1 className="text-3xl md:text-4xl font-bold font-headline mt-2 text-foreground">
                 Sobha Hoskote
             </h1>
-            <p className="text-lg text-muted-foreground mt-1">At Hoskote, Bangalore</p>
+            <p className="text-lg text-muted-foreground mt-1">At OMR, Hoskote, Bangalore</p>
             <p className="text-sm text-muted-foreground">By Sobha Limited</p>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6 text-sm text-muted-foreground">
                 <div>
                     <p className="font-semibold text-foreground">Development Size</p>
-                    <p>50 Acres</p>
+                    <p>48 Acres</p>
                 </div>
                 <div>
                     <p className="font-semibold text-foreground">No. of Units</p>
-                    <p>550+ Plots</p>
+                    <p>5,406 Apartments</p>
                 </div>
                 <div>
-                    <p className="font-semibold text-foreground">Possession</p>
-                    <p>December 2028 Onwards</p>
+                    <p className="font-semibold text-foreground">Unit Types</p>
+                    <p>1, 2, 3 & 4 BHK</p>
                 </div>
             </div>
 
             <div className="mt-6 border-t border-border/50 pt-6">
                 <div className="bg-black/80 text-white p-2 text-center text-sm font-semibold rounded-t-md">
-                    MOST AWAITED LAUNCH
+                    EAST BENGALURU'S TALLEST TOWERS
                 </div>
                 <div className="bg-primary/20 text-primary-foreground p-4 mt-0 text-center rounded-b-md">
-                    <p className="font-bold text-primary">Pre Launching Residential Plots</p>
-                    <p className="text-sm text-primary/80">Avail Special Launch offers Limited Units Only</p>
+                    <p className="font-bold text-primary">Pre-Launch Premium Apartments</p>
+                    <p className="text-sm text-primary/80">Submit Your Expression of Interest (EOI) Now!</p>
                 </div>
             </div>
 
             <div className="mt-6 text-center">
-                <p className="font-semibold text-foreground">30x40, 30x50, 40x60 Plots</p>
-                <p className="text-4xl font-bold mt-2 text-primary drop-shadow-lg">₹ 78 Lakhs* Onwards</p>
+                <p className="font-semibold text-foreground">1, 2, 3 & 4 BHK Apartments</p>
+                <p className="text-4xl font-bold mt-2 text-primary drop-shadow-lg">Starting from ₹ 1 Cr*</p>
                 <Dialog>
                     <DialogTrigger asChild>
                       <Button size="lg" className="mt-4 w-full md:w-auto font-bold text-lg">Enquire Now</Button>
                     </DialogTrigger>
                     <BrochurePopup />
                 </Dialog>
-                <p className="text-xs text-muted-foreground mt-2">RERA No: PRM/KA/RERA/1251/308/PR/210321/004035</p>
+                <p className="text-xs text-muted-foreground mt-2">RERA Approval Pending</p>
             </div>
         </div>
 

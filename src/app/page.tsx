@@ -10,6 +10,7 @@ import { Location } from '@/components/features/location';
 import { FloatingForm } from '@/components/features/floating-form';
 import { SiteAndFloorPlan } from '@/components/features/site-and-floor-plan';
 import { VirtualTour } from '@/components/features/virtual-tour';
+import { Faq } from '@/components/features/faq';
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
           <Location />
           <Gallery />
           <VirtualTour />
+          <Faq />
           <Contact />
         </main>
       </div>

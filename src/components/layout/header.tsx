@@ -21,7 +21,8 @@ const navLinks = [
     { href: '#amenities', label: 'Amenities' },
     { href: '#location', label: 'Location' },
     { href: '#gallery', label: 'Gallery' },
-    { href: '#virtual-tour', label: 'Virtual Site Tour' },
+    { href: '#faq', label: 'FAQ' },
+    { href: '#contact', label: 'Contact' },
 ];
 
 export function Header() {
