@@ -8,20 +8,26 @@ import { Gallery } from '@/components/features/gallery';
 import { Contact } from '@/components/features/contact';
 import { Pricing } from '@/components/features/pricing';
 import { Location } from '@/components/features/location';
+import { FloatingForm } from '@/components/features/floating-form';
 
 export default function Home() {
   return (
-    <div className="overflow-x-hidden">
-      <Hero />
-      <Overview />
-      <Highlights />
-      <Location />
-      <MasterPlan />
-      <FloorPlans />
-      <Pricing />
-      <Amenities />
-      <Gallery />
-      <Contact />
+    <div className="flex">
+      <div className="flex-grow lg:mr-96">
+        <Hero />
+        <main className="overflow-x-hidden">
+          <Overview />
+          <Highlights />
+          <Location />
+          <MasterPlan />
+          <FloorPlans />
+          <Pricing />
+          <Amenities />
+          <Gallery />
+          <Contact />
+        </main>
+      </div>
+      <FloatingForm />
     </div>
   );
 }
