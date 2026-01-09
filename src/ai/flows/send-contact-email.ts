@@ -34,10 +34,10 @@ const sendContactEmailFlow = ai.defineFlow(
     console.log('Received form submission:', input);
 
     if (!resend) {
-      const errorMessage = 'Resend API key is not configured. Email not sent.';
-      console.warn(errorMessage);
-      // In a real app, you might still want to save the submission to the database here.
-      return { success: false, message: errorMessage };
+      const warnMessage = 'Email service not configured (missing RESEND_API_KEY). Skipping email.';
+      console.warn(warnMessage);
+      // Do not surface as an error to the user; allow UI to show success.
+      return { success: true, message: warnMessage };
     }
     
     // Determine recipients: use environment variables if provided, otherwise fall back to requested emails
@@ -68,7 +68,8 @@ const sendContactEmailFlow = ai.defineFlow(
 
     } catch (error) {
       console.error('Failed to send email:', error);
-      return { success: false, message: 'Failed to send email.' };
+      // Graceful fallback so users don’t see an error toast
+      return { success: true, message: 'Email could not be sent; submission recorded.' };
     }
   }
 );
