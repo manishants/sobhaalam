@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Building2, Menu, Phone } from 'lucide-react';
+import { Building2, Menu, Phone, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -11,14 +11,12 @@ import {
 const navLinks = [
     { href: '#home', label: 'Home' },
     { href: '#overview', label: 'Overview' },
-    { href: '#highlights', label: 'Highlights' },
-    { href: '#location', label: 'Location' },
-    { href: '#master-plan', label: 'Master Plan' },
-    { href: '#floor-plan', label: 'Floor Plans' },
-    { href: '#price', label: 'Pricing' },
+    { href: '#price', label: 'Price' },
+    { href: '#master-plan', label: 'Site & Floor Plan' },
     { href: '#amenities', label: 'Amenities' },
+    { href: '#location', label: 'Location' },
     { href: '#gallery', label: 'Gallery' },
-    { href: '#contact', label: 'Contact Us' },
+    { href: '#', label: 'Virtual Site Tour' },
 ];
 
 export function Header() {
@@ -29,17 +27,17 @@ export function Header() {
           <Building2 className="h-7 w-7 text-primary" />
           <span className="font-bold text-xl font-headline">Prestige Crystal Lawns</span>
         </Link>
-        <nav className="hidden lg:flex items-center space-x-6 text-sm font-medium">
+        <nav className="hidden lg:flex items-center space-x-4 text-sm font-medium">
           {navLinks.map(link => (
-            <Link key={link.href} href={link.href} className="transition-colors hover:text-primary">
+            <Link key={link.href + link.label} href={link.href} className="transition-colors hover:text-primary">
               {link.label}
             </Link>
           ))}
         </nav>
-        <div className="flex flex-1 items-center justify-end gap-4">
-            <Button variant="outline" className="hidden sm:flex items-center">
-                <Phone className="mr-2 h-4 w-4" />
-                +91 12345 67890
+        <div className="flex flex-1 items-center justify-end gap-2">
+            <Button className="hidden sm:flex items-center animate-pulse">
+                <Download className="mr-2 h-4 w-4" />
+                Brochure
             </Button>
             <div className="lg:hidden">
                 <Sheet>
@@ -50,13 +48,17 @@ export function Header() {
                     </SheetTrigger>
                     <SheetContent side="right">
                         <nav className="flex flex-col space-y-4 mt-8">
-                            {navLinks.map(link => (
-                                <SheetClose asChild key={link.href}>
+                            {[...navLinks, { href: '#', label: 'Brochure' }].map(link => (
+                                <SheetClose asChild key={link.href + link.label}>
                                   <Link href={link.href} className="text-lg transition-colors hover:text-primary">
                                       {link.label}
                                   </Link>
                                 </SheetClose>
                             ))}
+                             <Button className="w-full mt-4">
+                                <Download className="mr-2 h-4 w-4" />
+                                Brochure
+                            </Button>
                         </nav>
                     </SheetContent>
                 </Sheet>
