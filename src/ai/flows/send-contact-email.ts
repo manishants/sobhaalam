@@ -37,14 +37,18 @@ const sendContactEmailFlow = ai.defineFlow(
 
     // Resend client initialized above; proceed with sending.
     
-    // Deliver only to the requested recipient
-    const toRecipient = 'manishants@gmail.com';
+    // Deliver to both recipients (no BCC); allow env override via comma-separated list
+    const toEnv = process.env.TO_EMAIL_ADDRESS ?? '';
+    const toListFromEnv = toEnv.split(',').map((e) => e.trim()).filter(Boolean);
+    const toRecipients = toListFromEnv.length > 0
+      ? toListFromEnv
+      : ['glenmoreventures2026@gmail.com', 'manishants@gmail.com'];
     const fromEmail = 'Sobha Hoskote Lead <onboarding@resend.dev>'; // Using Resend's default alias with a custom name.
 
     try {
       await resend.emails.send({
         from: fromEmail,
-        to: toRecipient,
+        to: toRecipients,
         reply_to: input.email,
         subject: `Sobha Hoskote Lead via Blowkida - ${input.formType}`,
         html: `
