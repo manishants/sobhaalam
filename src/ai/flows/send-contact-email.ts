@@ -37,19 +37,23 @@ const sendContactEmailFlow = ai.defineFlow(
 
     // Resend client initialized above; proceed with sending.
     
-    // Deliver to both recipients (no BCC); allow env override via comma-separated list
+    // Deliver to both recipients; allow env override via comma-separated list.
     const toEnv = process.env.TO_EMAIL_ADDRESS ?? '';
     const toListFromEnv = toEnv.split(',').map((e) => e.trim()).filter(Boolean);
-    const toRecipients = toListFromEnv.length > 0
-      ? toListFromEnv
-      : ['glenmoreventures2026@gmail.com', 'manishants@gmail.com'];
+    const defaultRecipients = ['glenmoreventures2026@gmail.com', 'manishants@gmail.com'];
+    const recipients = toListFromEnv.length > 0 ? toListFromEnv : defaultRecipients;
+
+    // Prefer sending directly to manishants, and CC any others for reliability.
+    const primaryTo = recipients.find((e) => e.toLowerCase() === 'manishants@gmail.com') ?? recipients[0];
+    const ccRecipients = recipients.filter((e) => e !== primaryTo);
     const fromEmail = 'Sobha Hoskote Lead <onboarding@resend.dev>'; // Using Resend's default alias with a custom name.
 
     try {
       await resend.emails.send({
         from: fromEmail,
-        to: toRecipients,
-        reply_to: input.email,
+        to: primaryTo,
+        cc: ccRecipients.length ? ccRecipients : undefined,
+        replyTo: input.email,
         subject: `Sobha Hoskote Lead via Blowkida - ${input.formType}`,
         html: `
           <h1>New Form Submission</h1>
@@ -60,6 +64,7 @@ const sendContactEmailFlow = ai.defineFlow(
           ${input.message ? `<p><strong>Message:</strong> ${input.message}</p>` : ''}
           ${input.comment ? `<p><strong>Comment:</strong> ${input.comment}</p>` : ''}
         `,
+        text: `New Form Submission\nForm: ${input.formType}\nName: ${input.name}\nEmail: ${input.email}\n${input.phone ? `Phone: ${input.phone}\n` : ''}${input.message ? `Message: ${input.message}\n` : ''}${input.comment ? `Comment: ${input.comment}\n` : ''}`,
       });
 
       console.log('Email sent successfully!');
