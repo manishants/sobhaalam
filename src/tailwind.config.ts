@@ -8,6 +8,13 @@ export default {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       fontFamily: {
         body: ['Inter', 'sans-serif'],
@@ -114,7 +121,52 @@ export default {
         'fade-in-down': 'fade-in-down 0.5s ease-out',
         'fade-in-up': 'fade-in-up 0.5s ease-out 0.2s backwards',
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            '--tw-prose-body': theme('colors.foreground / 80%'),
+            '--tw-prose-headings': theme('colors.foreground'),
+            '--tw-prose-lead': theme('colors.muted.foreground'),
+            '--tw-prose-links': theme('colors.primary'),
+            '--tw-prose-bold': theme('colors.foreground'),
+            '--tw-prose-counters': theme('colors.muted.foreground'),
+            '--tw-prose-bullets': theme('colors.border'),
+            '--tw-prose-hr': theme('colors.border'),
+            '--tw-prose-quotes': theme('colors.foreground'),
+            '--tw-prose-quote-borders': theme('colors.border'),
+            '--tw-prose-captions': theme('colors.muted.foreground'),
+            '--tw-prose-code': theme('colors.foreground'),
+            '--tw-prose-pre-code': theme('colors.foreground'),
+            '--tw-prose-pre-bg': theme('colors.muted'),
+            '--tw-prose-th-borders': theme('colors.border'),
+            '--tw-prose-td-borders': theme('colors.border'),
+          },
+        },
+        invert: {
+            css: {
+                '--tw-prose-body': theme('colors.foreground / 80%'),
+                '--tw-prose-headings': theme('colors.foreground'),
+                '--tw-prose-lead': theme('colors.muted.foreground'),
+                '--tw-prose-links': theme('colors.primary'),
+                '--tw-prose-bold': theme('colors.foreground'),
+                '--tw-prose-counters': theme('colors.muted.foreground'),
+                '--tw-prose-bullets': theme('colors.border'),
+                '--tw-prose-hr': theme('colors.border'),
+                '--tw-prose-quotes': theme('colors.foreground'),
+                '--tw-prose-quote-borders': theme('colors.border'),
+                '--tw-prose-captions': theme('colors.muted.foreground'),
+                '--tw-prose-code': theme('colors.foreground'),
+                '--tw-prose-pre-code': theme('colors.foreground'),
+                '--tw-prose-pre-bg': 'hsl(var(--muted) / 50%)',
+                '--tw-prose-th-borders': theme('colors.border'),
+                '--tw-prose-td-borders': theme('colors.border'),
+            },
+        },
+      }),
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [
+    require('tailwindcss-animate'),
+    require('@tailwindcss/typography'),
+  ],
 } satisfies Config;
