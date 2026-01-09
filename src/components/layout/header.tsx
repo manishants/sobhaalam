@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Building2, Menu, Download } from 'lucide-react';
+import { Menu, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -12,6 +12,7 @@ import {
 import { BrochurePopup } from '@/components/features/brochure-popup';
 import { Dialog, DialogTrigger } from '../ui/dialog';
 import { useEffect, useState } from 'react';
+import { SobhaLogo } from './logo';
 
 const navLinks = [
     { href: '#home', label: 'Home' },
@@ -63,8 +64,8 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-sm">
       <div className="container flex h-16 items-center mx-auto px-4">
         <Link href="/" className="flex items-center gap-2 mr-6">
-          <Building2 className="h-7 w-7 text-primary" />
-          <span className="font-bold text-xl font-headline text-foreground">Sobha Hoskote</span>
+          <SobhaLogo />
+          <span className="font-bold text-xl font-headline text-foreground hidden sm:inline">Hoskote</span>
         </Link>
         <nav className="hidden lg:flex items-center space-x-4 text-sm font-medium">
           {navLinks.map(link => (
