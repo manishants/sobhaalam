@@ -29,14 +29,14 @@ export function Article() {
             Sobha’s entry into Hoskote further strengthens the area’s appeal, positioning it as a premium residential destination rather than just an affordable alternative.
           </p>
           
-          <h3>Introducing Sobha Codename Project Name at Hoskote</h3>
+          <h3>Introducing Sobha Codename [Project Name] at Hoskote</h3>
           <p>
-            Sobha Codename Project Name is an upcoming large-scale residential township designed to set new benchmarks in East Bengaluru living. Located at Hoskote Toll Gate on OMR Road, this project enjoys unmatched road connectivity while offering residents a serene and expansive living environment.
+            Sobha Codename [Project Name] is an upcoming large-scale residential township designed to set new benchmarks in East Bengaluru living. Located at Hoskote Toll Gate on OMR Road, this project enjoys unmatched road connectivity while offering residents a serene and expansive living environment.
           </p>
           
           <h4>Project Overview</h4>
           <ul>
-            <li><strong>Project Name:</strong> Sobha Codename Project Name</li>
+            <li><strong>Project Name:</strong> Sobha Codename [Project Name]</li>
             <li><strong>Developer:</strong> Sobha Limited</li>
             <li><strong>Location:</strong> Hoskote, OMR Road, Old Madras Road (NH-75), Bengaluru</li>
             <li><strong>Land Parcel:</strong> 48 Acres</li>
@@ -50,7 +50,7 @@ export function Article() {
 
           <h3>Apartment Configurations at Sobha Hoskote</h3>
           <p>
-            Sobha Codename Project Name offers a wide range of premium apartment options designed to cater to different family sizes and lifestyle needs.
+            Sobha Codename [Project Name] offers a wide range of premium apartment options designed to cater to different family sizes and lifestyle needs.
           </p>
           <h4>Available Unit Types</h4>
           <ul>
@@ -69,7 +69,7 @@ export function Article() {
           <p>This diversity makes Sobha Hoskote ideal for first-time homebuyers, growing families, and high-end investors.</p>
           
           <h3>Pricing & Investment Potential</h3>
-          <p>The expected pricing for Sobha Codename Project Name is around:</p>
+          <p>The expected pricing for Sobha Codename [Project Name] is around:</p>
           <p><strong>₹13,500 per sq. ft. (indicative)</strong></p>
           <p>Considering Sobha’s construction quality, the project scale, and its location on NH-75, this pricing positions Sobha Hoskote competitively within East Bengaluru’s premium residential market.</p>
           
@@ -89,7 +89,7 @@ export function Article() {
 
           <h3>Retail & Commercial Components Within the Project</h3>
           <p>
-            Sobha Codename Project Name is designed as a self-sustained township, integrating residential, retail, and commercial spaces.
+            Sobha Codename [Project Name] is designed as a self-sustained township, integrating residential, retail, and commercial spaces.
           </p>
           <h4>Retail Building</h4>
           <ul>
