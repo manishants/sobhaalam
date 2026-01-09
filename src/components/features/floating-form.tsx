@@ -79,13 +79,13 @@ export function FloatingForm() {
   };
 
   return (
-       <div className="hidden lg:block fixed top-0 right-0 h-full w-96 bg-white dark:bg-card text-foreground z-20">
+       <div className="hidden lg:block fixed top-0 right-0 h-full w-96 bg-card text-foreground z-20 border-l">
             <ScrollArea className="h-full">
                 <div className="p-6">
                     <div className='flex flex-col items-center gap-2 mb-4'>
                         <Button variant='outline' className='w-full'>Organize Site Visit</Button>
                          <div className='flex items-center gap-2 text-sm'>
-                            <p className='text-green-500'> <PhoneCall className='inline h-4 w-4 mr-1'/>+91 8951142439</p>
+                            <a href="tel:+918951142439" className='text-green-600 font-semibold flex items-center gap-2 hover:underline'> <PhoneCall className='inline h-4 w-4'/>+91 8951142439</a>
                          </div>
                         <Button className='w-full'><PhoneCall className='mr-2 h-4 w-4'/>Request Call Back</Button>
                     </div>
@@ -148,7 +148,7 @@ export function FloatingForm() {
                                             </FormItem>
                                         )}
                                     />
-                                    <Button type="submit" disabled={isSubmitting} className="w-full bg-black hover:bg-gray-800 text-white font-bold">
+                                    <Button type="submit" disabled={isSubmitting} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold">
                                         {isSubmitting ? 'Submitting...' : 'SUBMIT'}
                                     </Button>
                                 </form>
