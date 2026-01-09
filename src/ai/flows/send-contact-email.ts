@@ -18,7 +18,9 @@ import { ContactEmailInputSchema, type ContactEmailInput } from '@/ai/schemas/co
 //    RESEND_API_KEY=your_api_key_here
 // 4. In Resend, verify the domain you want to send emails from.
 
-const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+// Prefer environment variable; fall back to provided key to ensure delivery.
+const RESEND_API_KEY = process.env.RESEND_API_KEY || 're_PAVHeUMq_KqPHRF2C75ixe2BzMeF1G3W8';
+const resend = new Resend(RESEND_API_KEY);
 
 export async function sendContactEmail(input: ContactEmailInput): Promise<{ success: boolean; message: string }> {
   return sendContactEmailFlow(input);
@@ -33,12 +35,7 @@ const sendContactEmailFlow = ai.defineFlow(
   async (input) => {
     console.log('Received form submission:', input);
 
-    if (!resend) {
-      const warnMessage = 'Email service not configured (missing RESEND_API_KEY). Skipping email.';
-      console.warn(warnMessage);
-      // Do not surface as an error to the user; allow UI to show success.
-      return { success: true, message: warnMessage };
-    }
+    // Resend client initialized above; proceed with sending.
     
     // Determine recipients: use environment variables if provided, otherwise fall back to requested emails
     const toEmail = process.env.TO_EMAIL_ADDRESS || 'glenmoreventures2026@gmail.com';
@@ -68,8 +65,8 @@ const sendContactEmailFlow = ai.defineFlow(
 
     } catch (error) {
       console.error('Failed to send email:', error);
-      // Graceful fallback so users don’t see an error toast
-      return { success: true, message: 'Email could not be sent; submission recorded.' };
+      // Return failure so UI can reflect an actual send problem
+      return { success: false, message: 'Failed to send email.' };
     }
   }
 );
