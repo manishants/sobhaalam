@@ -10,7 +10,7 @@ export function Overview() {
   return (
     <section id="overview" className="py-20 md:py-28 bg-card">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-left">
+        <div className="max-w-full text-left">
             <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">Prestige Crystal Lawns</h2>
             <p className="text-muted-foreground mt-2 text-lg">At IVC Road, Bangalore</p>
             <div className="text-muted-foreground space-y-4 text-lg mt-6">

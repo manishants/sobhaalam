@@ -71,6 +71,12 @@
       "description": "Apartment balcony view.",
       "imageUrl": "https://images.unsplash.com/photo-1577450775949-58ec8d02cad9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Y2l0eSUyMHZpZXd8ZW58MHx8fHwxNzY3OTEyNjgyfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "city view"
+    },
+    {
+      "id": "costing-sheet",
+      "description": "A sample costing sheet for a property.",
+      "imageUrl": "https://images.unsplash.com/photo-1625225231874-dc5df462f1ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxkb2N1bWVudCUyMGZvcm18ZW58MHx8fHwxNzY3ODk5OTQ5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "document form"
     }
   ]
 }
