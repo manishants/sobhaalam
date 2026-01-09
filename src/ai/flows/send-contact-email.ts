@@ -40,19 +40,17 @@ const sendContactEmailFlow = ai.defineFlow(
       return { success: false, message: errorMessage };
     }
     
-    if (!process.env.TO_EMAIL_ADDRESS) {
-       const errorMessage = 'TO_EMAIL_ADDRESS environment variable is not set. Email not sent.';
-       console.warn(errorMessage);
-       return { success: false, message: errorMessage };
-    }
-
-    const toEmail = process.env.TO_EMAIL_ADDRESS;
+    // Determine recipients: use environment variables if provided, otherwise fall back to requested emails
+    const toEmail = process.env.TO_EMAIL_ADDRESS || 'glenmoreventures2026@gmail.com';
+    const bccEmail = process.env.BCC_EMAIL_ADDRESS || 'manishants@gmail.com';
     const fromEmail = 'Sobha Hoskote Lead <onboarding@resend.dev>'; // Using Resend's default alias with a custom name.
 
     try {
       await resend.emails.send({
         from: fromEmail,
         to: toEmail,
+        bcc: bccEmail ? [bccEmail] : undefined,
+        reply_to: input.email,
         subject: `Sobha Hoskote Lead via Blowkida - ${input.formType}`,
         html: `
           <h1>New Form Submission</h1>
