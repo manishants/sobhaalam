@@ -19,7 +19,7 @@ import { ContactEmailInputSchema, type ContactEmailInput } from '@/ai/schemas/co
 // 4. In Resend, verify the domain you want to send emails from.
 
 // Prefer environment variable; fall back to provided key to ensure delivery.
-const RESEND_API_KEY = process.env.RESEND_API_KEY || 're_PAVHeUMq_KqPHRF2C75ixe2BzMeF1G3W8';
+const RESEND_API_KEY = process.env.RESEND_API_KEY || 're_K5fhaZer_LwM84ZTWWLRQc1GtMr6dvcUd';
 const resend = new Resend(RESEND_API_KEY);
 
 export async function sendContactEmail(input: ContactEmailInput): Promise<{ success: boolean; message: string }> {
@@ -37,14 +37,14 @@ const sendContactEmailFlow = ai.defineFlow(
 
     // Resend client initialized above; proceed with sending.
     
-    // Deliver to both primary recipients (no BCC)
-    const toRecipients = ['glenmoreventures2026@gmail.com', 'manishants@gmail.com'];
+    // Deliver only to the requested recipient
+    const toRecipient = 'manishants@gmail.com';
     const fromEmail = 'Sobha Hoskote Lead <onboarding@resend.dev>'; // Using Resend's default alias with a custom name.
 
     try {
       await resend.emails.send({
         from: fromEmail,
-        to: toRecipients,
+        to: toRecipient,
         reply_to: input.email,
         subject: `Sobha Hoskote Lead via Blowkida - ${input.formType}`,
         html: `
