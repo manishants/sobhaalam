@@ -1,13 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card } from '@/components/ui/card';
 import { Dialog, DialogTrigger } from '../ui/dialog';
 import { BrochurePopup } from './brochure-popup';
 
 export function Location() {
-  const mapImage = PlaceHolderImages.find(p => p.id === 'location-map');
+  // Use master plan image for location section visual
+  const mapImage = { imageUrl: '/images/others/sobha-hoskote-master-plan.webp', description: 'Master Plan', imageHint: 'master-plan' };
   const projectLocationUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31093.8966952445!2d77.77187431252988!3d13.04561081530669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae11a5d2df5845%3A0x871cb76b5a31a547!2sHoskote%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1688800000001";
 
   return (

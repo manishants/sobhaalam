@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent } from '@/components/ui/card';
 import {
   Dialog,
@@ -9,14 +8,15 @@ import {
 } from "@/components/ui/dialog"
 import { BrochurePopup } from './brochure-popup';
 
+// Use local WebP assets from public/images for the gallery
 const galleryImages = [
-  PlaceHolderImages.find(p => p.id === 'gallery-1'),
-  PlaceHolderImages.find(p => p.id === 'gallery-2'),
-  PlaceHolderImages.find(p => p.id === 'gallery-3'),
-  PlaceHolderImages.find(p => p.id === 'gallery-4'),
-  PlaceHolderImages.find(p => p.id === 'gallery-5'),
-  PlaceHolderImages.find(p => p.id === 'gallery-6'),
-].filter(Boolean);
+  { id: 'banner', imageUrl: '/images/sobha-hoskote-banner.webp', description: 'Sobha Hoskote banner', imageHint: 'gallery' },
+  { id: 'exterior', imageUrl: '/images/sobha-hoskote-exterior.webp', description: 'Exterior elevation', imageHint: 'gallery' },
+  { id: 'hall', imageUrl: '/images/sobha-hoskote-hall.webp', description: 'Interior hall', imageHint: 'gallery' },
+  { id: 'hall1', imageUrl: '/images/sobha-hoskote-hall1.webp', description: 'Interior hall variant', imageHint: 'gallery' },
+  { id: 'pool', imageUrl: '/images/sobha-hoskote-swimming-pool.webp', description: 'Swimming pool', imageHint: 'gallery' },
+  { id: 'one', imageUrl: '/images/sobha-hoskote-1.webp', description: 'Sobha Hoskote view', imageHint: 'gallery' },
+];
 
 export function Gallery() {
   return (

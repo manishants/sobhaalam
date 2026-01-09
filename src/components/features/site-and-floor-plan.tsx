@@ -1,14 +1,14 @@
 'use client';
 
 import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card } from '@/components/ui/card';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { BrochurePopup } from './brochure-popup';
 
 export function SiteAndFloorPlan() {
-  const masterPlanImage = PlaceHolderImages.find(p => p.id === 'master-plan-image');
-  const floorPlanImage = PlaceHolderImages.find(p => p.id === 'floor-plan-3bhk');
+  // Use local WebP assets from public/images/others
+  const masterPlanImage = { imageUrl: '/images/others/sobha-hoskote-master-plan.webp', description: 'Master Plan', imageHint: 'master-plan' };
+  const floorPlanImage = { imageUrl: '/images/others/sobha-hoskote-floor-plan.webp', description: 'Typical Floor Plan', imageHint: 'floor-plan' };
   
   return (
     <section id="master-plan" className="py-20 md:py-28 bg-background">

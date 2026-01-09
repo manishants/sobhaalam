@@ -25,7 +25,7 @@ export function Article() {
             </header>
             <article className="prose prose-invert max-w-none">
               <p>
-                Sobha Hoskote is emerging as one of the most anticipated residential destinations in East Bengaluru, driven by infrastructure growth, seamless connectivity, and the entry of premium developers. Adding to this momentum is Sobha’s upcoming iconic project – Sobha Codename [Project Name], a mega residential township located at OMR Road, Hoskote Toll Gate, Bengaluru, right on Old Madras Road (NH-75).
+                Sobha Hoskote is emerging as one of the most anticipated residential destinations in East Bengaluru, driven by infrastructure growth, seamless connectivity, and the entry of premium developers. Adding to this momentum is Sobha’s upcoming iconic project – Sobha Hoskote, a mega residential township located at OMR Road, Hoskote Toll Gate, Bengaluru, right on Old Madras Road (NH-75).
               </p>
               <p>
                 Spread across an expansive 48 acres, this development is set to redefine the skyline of East Bengaluru with the tallest residential towers in the region, premium lifestyle offerings, and thoughtfully designed homes. For homebuyers and investors alike, Sobha Hoskote represents a rare opportunity to own property in a fast-growing corridor backed by the legacy and trust of Sobha Limited.
@@ -47,14 +47,14 @@ export function Article() {
                 Sobha’s entry into Hoskote further strengthens the area’s appeal, positioning it as a premium residential destination rather than just an affordable alternative.
               </p>
 
-              <h3 id="project-overview" className="font-headline text-2xl md:text-3xl mt-10">Introducing Sobha Codename [Project Name] at Hoskote</h3>
+              <h3 id="project-overview" className="font-headline text-2xl md:text-3xl mt-10">Introducing Sobha Hoskote</h3>
               <p>
-                Sobha Codename [Project Name] is an upcoming large-scale residential township designed to set new benchmarks in East Bengaluru living. Located at Hoskote Toll Gate on OMR Road, this project enjoys unmatched road connectivity while offering residents a serene and expansive living environment.
+                Sobha Hoskote is an upcoming large-scale residential township designed to set new benchmarks in East Bengaluru living. Located at Hoskote Toll Gate on OMR Road, this project enjoys unmatched road connectivity while offering residents a serene and expansive living environment.
               </p>
 
               <h4 className="font-headline text-xl md:text-2xl mt-6">Project Overview</h4>
               <ul>
-                <li><strong>Project Name:</strong> Sobha Codename [Project Name]</li>
+                <li><strong>Project Name:</strong> Sobha Hoskote</li>
                 <li><strong>Developer:</strong> Sobha Limited</li>
                 <li><strong>Location:</strong> Hoskote, OMR Road, Old Madras Road (NH-75), Bengaluru</li>
                 <li><strong>Land Parcel:</strong> 48 Acres</li>
@@ -68,7 +68,7 @@ export function Article() {
 
               <h3 id="apartment-configurations" className="font-headline text-2xl md:text-3xl mt-10">Apartment Configurations at Sobha Hoskote</h3>
               <p>
-                Sobha Codename [Project Name] offers a wide range of premium apartment options designed to cater to different family sizes and lifestyle needs.
+                Sobha Hoskote offers a wide range of premium apartment options designed to cater to different family sizes and lifestyle needs.
               </p>
               <h4 className="font-headline text-xl md:text-2xl mt-6">Available Unit Types</h4>
               <ul>
@@ -87,7 +87,7 @@ export function Article() {
               <p>This diversity makes Sobha Hoskote ideal for first-time homebuyers, growing families, and high-end investors.</p>
 
               <h3 id="pricing" className="font-headline text-2xl md:text-3xl mt-10">Pricing & Investment Potential</h3>
-              <p>The expected pricing for Sobha Codename [Project Name] is around:</p>
+              <p>The expected pricing for Sobha Hoskote is around:</p>
               <p><strong>₹13,500 per sq. ft. (indicative)</strong></p>
               <p>Considering Sobha’s construction quality, the project scale, and its location on NH-75, this pricing positions Sobha Hoskote competitively within East Bengaluru’s premium residential market.</p>
 
@@ -107,7 +107,7 @@ export function Article() {
 
               <h3 id="retail-commercial" className="font-headline text-2xl md:text-3xl mt-10">Retail & Commercial Components Within the Project</h3>
               <p>
-                Sobha Codename [Project Name] is designed as a self-sustained township, integrating residential, retail, and commercial spaces.
+                Sobha Hoskote is designed as a self-sustained township, integrating residential, retail, and commercial spaces.
               </p>
               <h4 className="font-headline text-xl md:text-2xl mt-6">Retail Building</h4>
               <ul>
@@ -187,11 +187,11 @@ export function Article() {
                 <li>Increased commercial activity</li>
                 <li>Demand spillover from Whitefield</li>
               </ul>
-              <p>Projects like Sobha Codename Project Name are expected to accelerate this growth further.</p>
+              <p>Projects like Sobha Hoskote are expected to accelerate this growth further.</p>
 
               <h3 id="final-thoughts" className="font-headline text-2xl md:text-3xl mt-10">Final Thoughts on Sobha Hoskote</h3>
               <p>
-                Sobha Hoskote is no longer just an upcoming residential destination — it is shaping into one of East Bengaluru’s most promising real estate corridors. With Sobha Codename Project Name, Sobha Limited is introducing a landmark township that combines scale, design, connectivity, and trust.
+                Sobha Hoskote is no longer just an upcoming residential destination — it is shaping into one of East Bengaluru’s most promising real estate corridors. With Sobha Hoskote, Sobha Limited is introducing a landmark township that combines scale, design, connectivity, and trust.
               </p>
               <p>
                 For buyers looking to secure a premium home or investors seeking long-term appreciation, this project stands out as a high-potential opportunity in Bengaluru’s evolving real estate landscape.

@@ -2,17 +2,18 @@
 
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useEffect, useState } from 'react';
 import { Dialog, DialogTrigger } from '../ui/dialog';
 import { BrochurePopup } from './brochure-popup';
 
+// Use local WebP assets from public/images for hero backgrounds
 const heroImages = [
-  PlaceHolderImages.find(p => p.id === 'hero-background'),
-  PlaceHolderImages.find(p => p.id === 'gallery-1'),
-  PlaceHolderImages.find(p => p.id === 'gallery-2'),
-  PlaceHolderImages.find(p => p.id === 'gallery-5'),
-].filter(Boolean) as any[];
+  { id: 'banner', imageUrl: '/images/sobha-hoskote-banner.webp', description: 'Sobha Hoskote banner', imageHint: 'hero-background' },
+  { id: 'exterior', imageUrl: '/images/sobha-hoskote-exterior.webp', description: 'Project exterior view', imageHint: 'exterior' },
+  { id: 'hall', imageUrl: '/images/sobha-hoskote-hall.webp', description: 'Interior hall', imageHint: 'interior' },
+  { id: 'pool', imageUrl: '/images/sobha-hoskote-swimming-pool.webp', description: 'Swimming pool amenity', imageHint: 'amenity' },
+  { id: 'hall1', imageUrl: '/images/sobha-hoskote-hall1.webp', description: 'Interior hall variant', imageHint: 'interior-alt' },
+];
 
 
 export function Hero() {

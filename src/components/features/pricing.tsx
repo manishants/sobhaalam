@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { BrochurePopup } from './brochure-popup';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import {
   Table,
   TableBody,
@@ -38,7 +37,8 @@ const priceData = [
     }
 ];
 
-const costingDetailsImage = PlaceHolderImages.find(p => p.id === 'costing-sheet');
+// Use local EOI image from public/images/others
+const eoiImage = { id: 'eoi', imageUrl: '/images/others/sobha-hoskote-eoi.webp', description: 'Sobha Hoskote EOI Details', imageHint: 'eoi-image' };
 
 export function Pricing() {
     return (
@@ -86,16 +86,14 @@ export function Pricing() {
                             <DialogTrigger asChild>
                                 <div className="cursor-pointer group">
                                     <Card className="bg-background/50 backdrop-blur-sm border-border/50 p-2">
-                                        {costingDetailsImage && (
-                                            <Image
-                                                src={costingDetailsImage.imageUrl}
-                                                alt={costingDetailsImage.description}
-                                                width={400}
-                                                height={500}
-                                                className="w-full h-auto object-contain rounded-lg group-hover:shadow-primary/20 transition-shadow"
-                                                data-ai-hint={costingDetailsImage.imageHint}
-                                            />
-                                        )}
+                                        <Image
+                                            src={eoiImage.imageUrl}
+                                            alt={eoiImage.description}
+                                            width={400}
+                                            height={500}
+                                            className="w-full h-auto object-contain rounded-lg group-hover:shadow-primary/20 transition-shadow"
+                                            data-ai-hint={eoiImage.imageHint}
+                                        />
                                     </Card>
                                     <div className="bg-black/80 text-white p-3 mt-[-10px] relative z-10 rounded-b-lg">
                                         <h3 className="font-semibold text-lg">EOI Details</h3>

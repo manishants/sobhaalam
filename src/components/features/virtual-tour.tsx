@@ -1,13 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { PlayCircle } from 'lucide-react';
 import { Dialog, DialogTrigger } from '../ui/dialog';
 import { BrochurePopup } from './brochure-popup';
 
 export function VirtualTour() {
-  const bgImage = PlaceHolderImages.find(p => p.id === 'master-plan-image');
+  // Use local master plan image for the virtual tour background
+  const bgImage = { imageUrl: '/images/others/sobha-hoskote-master-plan.webp', description: 'Master Plan', imageHint: 'master-plan' };
 
   return (
     <section id="virtual-tour" className="relative py-20 md:py-36 text-white bg-card">
