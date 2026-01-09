@@ -29,9 +29,9 @@ export default function Home() {
           <Overview />
           <Pricing />
           <SiteAndFloorPlan />
-          <Highlights />
-          <Location />
           <Amenities />
+          <Location />
+          <Highlights />
           <Gallery />
           <VirtualTour />
           <Contact />

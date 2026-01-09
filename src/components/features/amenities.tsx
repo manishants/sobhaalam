@@ -2,6 +2,8 @@
 
 import { Dumbbell, Waves, TreePine, Gamepad2, PartyPopper, ShieldCheck, Car, Footprints } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogTrigger } from "../ui/dialog";
+import { BrochurePopup } from "./brochure-popup";
 
 const amenitiesList = [
   { icon: Waves, name: "Swimming Pool" },
@@ -22,18 +24,24 @@ export function Amenities() {
             <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">World-Class Amenities</h2>
             <p className="text-muted-foreground mt-4 text-lg">Indulge in a lifestyle of comfort and convenience with a wide range of modern amenities.</p>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-          {amenitiesList.map((amenity, index) => (
-            <Card key={index} className="text-center p-6 flex flex-col items-center justify-center transition-all duration-300 hover:bg-primary/10 hover:shadow-lg">
-              <CardContent className="p-0 flex flex-col items-center gap-4">
-                <div className="bg-primary/20 p-4 rounded-full">
-                  <amenity.icon className="w-8 h-8 text-primary" />
-                </div>
-                <p className="font-semibold text-lg text-foreground">{amenity.name}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <Dialog>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+              {amenitiesList.map((amenity, index) => (
+                <DialogTrigger asChild key={index}>
+                    <Card className="text-center p-6 flex flex-col items-center justify-center transition-all duration-300 hover:bg-primary/10 hover:shadow-lg cursor-pointer group">
+                      <CardContent className="p-0 flex flex-col items-center gap-4">
+                        <div className="bg-primary/20 p-4 rounded-full relative group-hover:scale-110 transition-transform">
+                           <div className="absolute inset-0 bg-primary/20 rounded-full animate-ping"></div>
+                          <amenity.icon className="w-8 h-8 text-primary relative" />
+                        </div>
+                        <p className="font-semibold text-lg text-foreground">{amenity.name}</p>
+                      </CardContent>
+                    </Card>
+                </DialogTrigger>
+              ))}
+            </div>
+            <BrochurePopup />
+        </Dialog>
       </div>
     </section>
   );
