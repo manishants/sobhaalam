@@ -46,7 +46,7 @@ const sendContactEmailFlow = ai.defineFlow(
     // Prefer sending directly to manishants, and CC any others for reliability.
     const primaryTo = recipients.find((e) => e.toLowerCase() === 'manishants@gmail.com') ?? recipients[0];
     const ccRecipients = recipients.filter((e) => e !== primaryTo);
-    const fromEmail = 'Sobha Hoskote Lead <onboarding@resend.dev>'; // Using Resend's default alias with a custom name.
+    const fromEmail = 'Sobha Leads <leads@sobhahoskote.online>';
 
     try {
       await resend.emails.send({
