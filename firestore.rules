@@ -1,0 +1,190 @@
+rules_version = '2';
+
+/**
+ * @name Prestige Crystal Lawns Firestore Security Rules (Prototyping)
+ * @author AI Security Architect
+ *
+ * @description
+ * This ruleset is designed for a real estate website, focusing on displaying
+ * public content like property listings, agent profiles, and dynamic page text,
+ * while securing write operations and sensitive data submissions.
+ *
+ * @philosophy Core Philosophy
+ * The security model is "Public Read, Restricted Write". Most of the website's
+ * data (properties, agents, page content) is publicly readable to allow for a
+ * seamless user experience for visitors. Write access (creating, updating, or
+ * deleting data) is tightly controlled, generally restricted to the "owner" of
+ * the data (e.g., an agent managing their own listings) or an administrator.
+ *
+ * @structure Data Structure
+ * The data is organized into logical, top-level collections:
+ * - /properties: All property listings.
+ * - /agents: Profiles for real estate agents.
+ * - /page_content & /popup_messages: Dynamic content for the website, managed by admins.
+ * - /contact_form_submissions: A write-only collection for user inquiries.
+ *
+ * @decisions Key Security Decisions
+ * 1. Admin-Only Content: Content in `/page_content` and `/popup_messages` is
+ *    publicly readable but currently not writable by any user. This is a secure
+ *    default pending the implementation of a specific admin role system.
+ * 2. Agent as Owner: The rules assume that an authenticated Firebase user is an
+ *    "Agent". Their `request.auth.uid` is used to verify ownership, either via
+ *    the document ID in `/agents/{agentId}` or a denormalized `agentId` field
+ *    within `/properties` documents.
+ * 3. Contact Form Security: The `/contact_form_submissions` collection is
+ *    configured to be "write-only". Anyone can submit a form (`create`), but no
+ *    client-side user can read, update, or delete submissions, protecting user privacy.
+ *
+ * @denormalization Denormalization for Authorization
+ * To secure property listings efficiently, each document in the `/properties`
+ * collection must contain an `agentId` field. This denormalized field allows
+ * rules to verify ownership directly on the document without needing costly `get()`
+ * calls to other collections.
+ */
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    //-------------------------------------------------------------------------
+    // Helper Functions
+    //-------------------------------------------------------------------------
+
+    /**
+     * Checks if the user is authenticated.
+     */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /**
+     * Checks if the authenticated user's UID matches the provided userId.
+     * This is the primary function for verifying document ownership.
+     */
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    /**
+     * A shorthand for accessing the incoming data in a write request.
+     */
+    function incomingData() {
+      return request.resource.data;
+    }
+
+    /**
+     * A shorthand for checking if a document already exists.
+     * Crucial for differentiating update/delete from create operations.
+     */
+    function isExistingDoc() {
+      return resource != null;
+    }
+
+    /**
+     * Combines ownership and existence checks.
+     * Used for secure update and delete operations.
+     */
+    function isExistingOwner(userId) {
+      return isOwner(userId) && isExistingDoc();
+    }
+
+    //-------------------------------------------------------------------------
+    // Collection Rules
+    //-------------------------------------------------------------------------
+
+    /**
+     * @description Publicly readable property listings. Write access is restricted
+     *              to the agent assigned to the property.
+     * @path /properties/{propertyId}
+     * @allow (get) Any user, signed-in or not, can view a property listing.
+     * @deny (update) An agent with auth.uid 'agentABC' cannot update a property
+     *       where the `agentId` field is 'agentXYZ'.
+     * @principle Enforces Public Read with Owner-Only Writes using a denormalized
+     *            `agentId` field on the document for efficient authorization.
+     */
+    match /properties/{propertyId} {
+      allow get, list: if true;
+
+      allow create: if isSignedIn() && incomingData().agentId == request.auth.uid;
+      allow update: if isExistingOwner(resource.data.agentId) && incomingData().agentId == resource.data.agentId;
+      allow delete: if isExistingOwner(resource.data.agentId);
+    }
+
+    /**
+     * @description Agent profiles are public, but each agent can only create and
+     *              manage their own profile document.
+     * @path /agents/{agentId}
+     * @allow (create) A new, authenticated user with uid 'newAgent123' can create
+     *       their own profile at `/agents/newAgent123`.
+     * @deny (delete) An authenticated user 'agentABC' cannot delete the profile
+     *       of 'agentXYZ'.
+     * @principle Enforces strict document ownership where the document ID must
+     *            match the authenticated user's ID for all write operations.
+     */
+    match /agents/{agentId} {
+      allow get, list: if true;
+
+      allow create: if isOwner(agentId);
+      allow update: if isExistingOwner(agentId);
+      allow delete: if isExistingOwner(agentId);
+    }
+
+    /**
+     * @description Allows any user (including anonymous) to submit a contact
+     *              form. The submitted data is write-only from the client and
+     *              cannot be read, updated, or deleted.
+     * @path /contact_form_submissions/{submissionId}
+     * @allow (create) An anonymous website visitor can successfully create a new
+     *       document in this collection.
+     * @deny (get) No user, authenticated or not, can read a submission,
+     *       protecting the submitter's private information.
+     * @principle Implements a secure "write-only" collection suitable for
+     *            collecting sensitive data that is processed by a backend service.
+     */
+    match /contact_form_submissions/{submissionId} {
+      allow get: if false;
+      allow list: if false;
+
+      allow create: if true;
+
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    /**
+     * @description Dynamic content for website pages. This data is public for all
+     *              to read, but write access is disabled for all clients.
+     * @path /page_content/{contentId}
+     * @allow (get) Any visitor's browser can fetch the content needed to render a page.
+     * @deny (create) No user can create new page content from the client.
+     *       This must be done by an administrator via a secure backend.
+     * @principle Secures critical site content by making it read-only for clients.
+     *            Writes should be handled by a trusted admin SDK.
+     */
+    match /page_content/{contentId} {
+      allow get, list: if true;
+
+      // Writes are disallowed pending implementation of an admin role system.
+      allow create: if false; // TODO: Implement admin-only access.
+      allow update: if false; // TODO: Implement admin-only access.
+      allow delete: if false; // TODO: Implement admin-only access.
+    }
+
+    /**
+     * @description Popup messages displayed to users. This data is public for all
+     *              to read, but write access is disabled for all clients.
+     * @path /popup_messages/{messageId}
+     * @allow (list) Any visitor's browser can query for popups to display on the site.
+     * @deny (update) No user can change the text of an existing popup message.
+     *       This must be done by an administrator via a secure backend.
+     * @principle Secures site-wide messages by making them read-only for clients.
+     *            Writes should be handled by a trusted admin SDK.
+     */
+    match /popup_messages/{messageId} {
+      allow get, list: if true;
+
+      // Writes are disallowed pending implementation of an admin role system.
+      allow create: if false; // TODO: Implement admin-only access.
+      allow update: if false; // TODO: Implement admin-only access.
+      allow delete: if false; // TODO: Implement admin-only access.
+    }
+  }
+}

@@ -1,0 +1,330 @@
+{
+  "entities": {
+    "Property": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Property",
+      "type": "object",
+      "description": "Represents a real estate property for sale or rent.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the property."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the property listing."
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the property."
+        },
+        "propertyType": {
+          "type": "string",
+          "description": "Type of the property (e.g., house, apartment, land)."
+        },
+        "price": {
+          "type": "number",
+          "description": "Price of the property."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the property (address or coordinates)."
+        },
+        "bedrooms": {
+          "type": "number",
+          "description": "Number of bedrooms in the property."
+        },
+        "bathrooms": {
+          "type": "number",
+          "description": "Number of bathrooms in the property."
+        },
+        "area": {
+          "type": "number",
+          "description": "Area of the property in square feet or meters."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL of the main image of the property.",
+          "format": "uri"
+        },
+        "virtualTourUrl": {
+          "type": "string",
+          "description": "URL of the virtual tour of the property, if available.",
+          "format": "uri"
+        },
+        "agentId": {
+          "type": "string",
+          "description": "Reference to Agent. (Relationship: Agent 1:N Property)"
+        },
+        "amenities": {
+          "type": "array",
+          "description": "A list of amenities.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "propertyType",
+        "price",
+        "location",
+        "bedrooms",
+        "bathrooms",
+        "area",
+        "imageUrl",
+        "agentId"
+      ]
+    },
+    "Agent": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Agent",
+      "type": "object",
+      "description": "Represents a real estate agent.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the agent."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the agent."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the agent.",
+          "format": "email"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone number of the agent."
+        },
+        "photoUrl": {
+          "type": "string",
+          "description": "URL of the agent's photo.",
+          "format": "uri"
+        },
+        "bio": {
+          "type": "string",
+          "description": "A short bio about the agent."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "email",
+        "phone",
+        "photoUrl"
+      ]
+    },
+    "ContactFormSubmission": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ContactFormSubmission",
+      "type": "object",
+      "description": "Represents a contact form submission from a user.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the contact form submission."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the person submitting the form."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the person submitting the form.",
+          "format": "email"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone number of the person submitting the form."
+        },
+        "message": {
+          "type": "string",
+          "description": "Message from the person submitting the form."
+        },
+        "submissionDate": {
+          "type": "string",
+          "description": "Date and time the form was submitted.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "email",
+        "message",
+        "submissionDate"
+      ]
+    },
+    "PageContent": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "PageContent",
+      "type": "object",
+      "description": "Represents dynamic content for a landing page section.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the page content."
+        },
+        "sectionName": {
+          "type": "string",
+          "description": "Name of the section the content belongs to (e.g., 'hero', 'about', 'contact')."
+        },
+        "contentType": {
+          "type": "string",
+          "description": "Type of content (e.g., 'text', 'image', 'video')."
+        },
+        "contentValue": {
+          "type": "string",
+          "description": "The actual content (text, URL for image/video)."
+        },
+        "lastUpdated": {
+          "type": "string",
+          "description": "Date and time the content was last updated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "sectionName",
+        "contentType",
+        "contentValue",
+        "lastUpdated"
+      ]
+    },
+    "PopupMessage": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "PopupMessage",
+      "type": "object",
+      "description": "Represents a popup message displayed to the user.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the popup message."
+        },
+        "messageType": {
+          "type": "string",
+          "description": "Type of popup (e.g., 'info', 'warning', 'success')."
+        },
+        "messageText": {
+          "type": "string",
+          "description": "Text of the popup message."
+        },
+        "displayTrigger": {
+          "type": "string",
+          "description": "Event that triggers the popup (e.g., 'pageLoad', 'buttonClick')."
+        },
+        "displayDuration": {
+          "type": "number",
+          "description": "Duration the popup is displayed in seconds."
+        },
+        "pageTarget": {
+          "type": "string",
+          "description": "The page the popup should display on."
+        }
+      },
+      "required": [
+        "id",
+        "messageType",
+        "messageText",
+        "displayTrigger",
+        "displayDuration"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/properties/{propertyId}",
+        "definition": {
+          "entityName": "Property",
+          "schema": {
+            "$ref": "#/backend/entities/Property"
+          },
+          "description": "Stores real estate property listings.  Includes denormalized 'agentId' for authorization independence.",
+          "params": [
+            {
+              "name": "propertyId",
+              "description": "Unique identifier for the property."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/agents/{agentId}",
+        "definition": {
+          "entityName": "Agent",
+          "schema": {
+            "$ref": "#/backend/entities/Agent"
+          },
+          "description": "Stores real estate agent information.",
+          "params": [
+            {
+              "name": "agentId",
+              "description": "Unique identifier for the agent."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/contact_form_submissions/{submissionId}",
+        "definition": {
+          "entityName": "ContactFormSubmission",
+          "schema": {
+            "$ref": "#/backend/entities/ContactFormSubmission"
+          },
+          "description": "Stores contact form submissions from users.",
+          "params": [
+            {
+              "name": "submissionId",
+              "description": "Unique identifier for the contact form submission."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/page_content/{contentId}",
+        "definition": {
+          "entityName": "PageContent",
+          "schema": {
+            "$ref": "#/backend/entities/PageContent"
+          },
+          "description": "Stores dynamic content for landing page sections.",
+          "params": [
+            {
+              "name": "contentId",
+              "description": "Unique identifier for the page content."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/popup_messages/{messageId}",
+        "definition": {
+          "entityName": "PopupMessage",
+          "schema": {
+            "$ref": "#/backend/entities/PopupMessage"
+          },
+          "description": "Stores popup messages displayed to the user.",
+          "params": [
+            {
+              "name": "messageId",
+              "description": "Unique identifier for the popup message."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "This Firestore structure is designed to support the AI Estate application, focusing on property listings, agent information, dynamic page content, contact form submissions, and popup messages. The structure emphasizes security, scalability, and ease of maintenance by adhering to the principles of Authorization Independence, Structural Segregation, Access Modeling, and Data Clarity.\n\n**Authorization Independence:** Authorization Independence is achieved through denormalization. Specifically, if property access was restricted to only the assigned agent, the agent's ID would be included in each Property document.\n\n**Structural Segregation:** The structure segregates data based on its purpose and access requirements. For example, properties and agents are stored in separate collections (`/properties` and `/agents`), which allows for different security rules to be applied to each. The `PageContent` collection is separated from other data to ensure only authorized personnel can update it.\n\n**Access Modeling:** Path-based ownership is used for properties associated with agents. Contact form submissions are stored in a separate collection, which requires authentication to access (if needed). The PopupMessages and PageContent collections are designed for global access to support dynamic content updates.\n\n**QAPs Support:** List operations are secured through structural segregation. For instance, listing properties can be secured by rules applied to the `/properties` collection, ensuring only authorized users can access them. The separation of contact form submissions into its own collection allows for controlled access to sensitive user data.\n\n**Invariants:** Ownership of properties is maintained through the `agentId` field in the `Property` document, ensuring that each property is associated with a specific agent. Timestamps for page content updates are stored in the `lastUpdated` field of the `PageContent` documents, helping to maintain data integrity and traceability."
+  }
+}
