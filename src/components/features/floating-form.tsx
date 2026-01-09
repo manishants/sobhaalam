@@ -79,7 +79,7 @@ export function FloatingForm() {
   };
 
   return (
-       <div className="hidden lg:block fixed top-0 right-0 h-full w-96 bg-card text-foreground z-20 border-l">
+       <div className="hidden lg:block fixed top-16 right-0 h-[calc(100vh-4rem)] w-96 bg-card text-foreground z-20 border-l">
             <ScrollArea className="h-full">
                 <div className="p-6">
                     <div className='flex flex-col items-center gap-2 mb-4'>
