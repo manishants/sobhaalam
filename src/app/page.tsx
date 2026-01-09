@@ -1,33 +1,27 @@
-'use client';
-
-import { useState } from 'react';
-import type { Property } from '@/lib/types';
 import { Hero } from '@/components/features/hero';
-import { PropertyListings } from '@/components/features/property-listings';
-import { FeaturesGrid } from '@/components/features/features-grid';
-import { DescriptionGenerator } from '@/components/features/description-generator';
-import { ContactForm } from '@/components/features/contact-form';
+import { Overview } from '@/components/features/overview';
+import { Highlights } from '@/components/features/highlights';
+import { MasterPlan } from '@/components/features/master-plan';
+import { FloorPlans } from '@/components/features/floor-plans';
+import { Amenities } from '@/components/features/amenities';
+import { Gallery } from '@/components/features/gallery';
+import { Contact } from '@/components/features/contact';
+import { Pricing } from '@/components/features/pricing';
+import { Location } from '@/components/features/location';
 
 export default function Home() {
-  const [properties, setProperties] = useState<Property[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
   return (
     <div className="overflow-x-hidden">
-      <Hero 
-        setIsLoading={setIsLoading} 
-        setProperties={setProperties}
-        setError={setError}
-      />
-      <PropertyListings 
-        isLoading={isLoading} 
-        properties={properties} 
-        error={error}
-      />
-      <FeaturesGrid />
-      <DescriptionGenerator />
-      <ContactForm />
+      <Hero />
+      <Overview />
+      <Highlights />
+      <Location />
+      <MasterPlan />
+      <FloorPlans />
+      <Pricing />
+      <Amenities />
+      <Gallery />
+      <Contact />
     </div>
   );
 }

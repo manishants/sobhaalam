@@ -3,101 +3,126 @@
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { handlePropertySearch } from '@/app/actions';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
-import { Search, Bot } from 'lucide-react';
-import type { Property } from '@/lib/types';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useToast } from '@/hooks/use-toast';
+import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { useFirebase } from '@/firebase';
+import { addDocumentNonBlocking } from '@/firebase/non-blocking-updates';
+import { collection } from 'firebase/firestore';
 
-type HeroProps = {
-  setIsLoading: (isLoading: boolean) => void;
-  setProperties: (properties: Property[]) => void;
-  setError: (error: string | null) => void;
-};
-
-const searchSchema = z.object({
-  query: z.string().min(5, 'Describe your ideal home in at least 5 words.'),
+const brochureSchema = z.object({
+  name: z.string().min(2, 'Name is required.'),
+  email: z.string().email('Invalid email address.'),
 });
 
-type SearchFormValues = z.infer<typeof searchSchema>;
+type BrochureFormValues = z.infer<typeof brochureSchema>;
 
-export function Hero({ setIsLoading, setProperties, setError }: HeroProps) {
-  const form = useForm<SearchFormValues>({
-    resolver: zodResolver(searchSchema),
-    defaultValues: { query: 'A 3-bedroom modern house with a pool in a sunny location' },
+export function Hero() {
+  const { toast } = useToast();
+  const heroImage = PlaceHolderImages.find(p => p.id === 'hero-background');
+  const { firestore } = useFirebase();
+
+  const form = useForm<BrochureFormValues>({
+    resolver: zodResolver(brochureSchema),
+    defaultValues: { name: '', email: '' },
   });
 
-  const onSubmit: SubmitHandler<SearchFormValues> = async (data) => {
-    setIsLoading(true);
-    setProperties([]);
-    setError(null);
-    const formData = new FormData();
-    formData.append('query', data.query);
-    const result = await handlePropertySearch(formData);
-    setIsLoading(false);
+  const { formState: { isSubmitting } } = form;
 
-    if (result.success) {
-      setProperties(result.data || []);
-      if((result.data || []).length === 0){
-        setError('No properties found matching your description. Try being more general.');
-      }
-    } else {
-      setError(result.error || 'An unexpected error occurred.');
+  const onSubmit: SubmitHandler<BrochureFormValues> = async (data) => {
+    if (!firestore) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Firestore is not available.",
+      });
+      return;
     }
+
+    const submissionData = {
+      ...data,
+      type: 'brochure_request',
+      submissionDate: new Date().toISOString(),
+    };
+    
+    addDocumentNonBlocking(collection(firestore, 'contact_form_submissions'), submissionData);
+
+    toast({
+      title: 'Request Received!',
+      description: "Thank you! The brochure will be sent to your email shortly.",
+    });
+    form.reset();
   };
 
   return (
-    <section className="relative py-24 md:py-40 text-center bg-card overflow-hidden">
-        <div className="absolute inset-0 bg-background/50 z-10"></div>
-        <div className="absolute -bottom-1/3 -left-1/4 w-1/2 h-1/2 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -top-1/3 -right-1/4 w-1/2 h-1/2 bg-accent/20 rounded-full blur-3xl animate-pulse delay-500"></div>
-
-        <div className="container mx-auto px-4 relative z-20">
-            <h1 className="text-4xl md:text-6xl font-bold font-headline mb-4 text-primary animate-fade-in-down">
-                Find Your Future Home With AI
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 animate-fade-in-up">
-                Describe your dream home, and our AI will find the perfect match. The future of real estate search is here.
-            </p>
-
-            <Form {...form}>
-                <form 
-                    onSubmit={form.handleSubmit(onSubmit)} 
-                    className="max-w-2xl mx-auto"
-                >
-                    <FormField
-                        control={form.control}
-                        name="query"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormControl>
-                                    <div className="relative">
-                                        <Bot className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                                        <Input
-                                            {...field}
-                                            type="text"
-                                            placeholder="e.g., 'a spacious 3-bedroom apartment with a city view'"
-                                            className="h-14 pl-12 pr-32 text-lg rounded-full"
-                                        />
-                                        <Button
-                                            type="submit"
-                                            size="lg"
-                                            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-accent hover:bg-accent/90 text-accent-foreground"
-                                            disabled={form.formState.isSubmitting}
-                                        >
-                                            <Search className="mr-2 h-5 w-5" />
-                                            Search
-                                        </Button>
-                                    </div>
-                                </FormControl>
-                                <FormMessage className="mt-2 text-left" />
-                            </FormItem>
-                        )}
-                    />
-                </form>
-            </Form>
+    <section id="home" className="relative h-[80vh] min-h-[600px] flex items-center justify-center text-white">
+      {heroImage && (
+         <Image
+            src={heroImage.imageUrl}
+            alt={heroImage.description}
+            fill
+            className="object-cover"
+            priority
+            data-ai-hint={heroImage.imageHint}
+          />
+      )}
+      <div className="absolute inset-0 bg-black/50" />
+      <div className="relative z-10 container mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
+        <div className="text-center md:text-left">
+          <h1 className="text-4xl md:text-6xl font-bold font-headline mb-4 animate-fade-in-down">
+            Prestige Crystal Lawns
+          </h1>
+          <p className="text-lg md:text-xl text-slate-200 max-w-xl mx-auto md:mx-0 animate-fade-in-up">
+            Experience luxurious living in the heart of the city with spacious apartments and world-class amenities.
+          </p>
         </div>
+        <div className="row-start-1 md:col-start-2">
+            <Card className="bg-background/80 backdrop-blur-sm text-foreground">
+                <CardHeader>
+                    <CardTitle className="text-center text-2xl font-headline">Download Brochure</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                            <FormField
+                                control={form.control}
+                                name="name"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Name</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="Your Name" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="email"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Email</FormLabel>
+                                        <FormControl>
+                                            <Input type="email" placeholder="your.email@example.com" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <Button type="submit" disabled={isSubmitting} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+                                {isSubmitting ? 'Submitting...' : 'Submit'}
+                            </Button>
+                        </form>
+                    </Form>
+                </CardContent>
+            </Card>
+        </div>
+      </div>
     </section>
   );
 }
