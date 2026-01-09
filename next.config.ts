@@ -30,6 +30,11 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  devIndicators: {
+    allowedDevOrigins: [
+      '**', // Allow all origins in dev mode for simplicity in this environment
+    ],
+  },
 };
 
 export default nextConfig;
