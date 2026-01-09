@@ -11,7 +11,7 @@ export function SiteAndFloorPlan() {
   const floorPlanImage = PlaceHolderImages.find(p => p.id === 'floor-plan-3bhk');
   
   return (
-    <section id="master-plan" className="py-20 md:py-28 bg-background">
+    <section id="master-plan" className="py-20 md:py-28 bg-card">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">Site & Floor Plan</h2>
@@ -23,7 +23,7 @@ export function SiteAndFloorPlan() {
                 {masterPlanImage && (
                     <DialogTrigger asChild>
                         <div className="cursor-pointer group">
-                            <Card className="overflow-hidden rounded-lg shadow-xl">
+                            <Card className="overflow-hidden rounded-lg shadow-xl bg-background/50 border-border/50">
                                 <Image
                                     src={masterPlanImage.imageUrl}
                                     alt={masterPlanImage.description}
@@ -33,14 +33,14 @@ export function SiteAndFloorPlan() {
                                     data-ai-hint={masterPlanImage.imageHint}
                                 />
                             </Card>
-                            <h3 className="text-center font-bold text-xl mt-4">Master Plan</h3>
+                            <h3 className="text-center font-bold text-xl mt-4 text-foreground">Master Plan</h3>
                         </div>
                     </DialogTrigger>
                 )}
                  {floorPlanImage && (
                     <DialogTrigger asChild>
                          <div className="cursor-pointer group">
-                            <Card className="overflow-hidden rounded-lg shadow-xl">
+                            <Card className="overflow-hidden rounded-lg shadow-xl bg-background/50 border-border/50">
                                 <Image
                                     src={floorPlanImage.imageUrl}
                                     alt={floorPlanImage.description}
@@ -50,7 +50,7 @@ export function SiteAndFloorPlan() {
                                     data-ai-hint={floorPlanImage.imageHint}
                                 />
                             </Card>
-                            <h3 className="text-center font-bold text-xl mt-4">Floor Plan</h3>
+                            <h3 className="text-center font-bold text-xl mt-4 text-foreground">Floor Plan</h3>
                         </div>
                     </DialogTrigger>
                 )}

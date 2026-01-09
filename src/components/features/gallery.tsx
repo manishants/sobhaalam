@@ -30,7 +30,7 @@ export function Gallery() {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {galleryImages.map((image, index) => image && (
                 <DialogTrigger asChild key={index}>
-                    <Card className="overflow-hidden group cursor-pointer">
+                    <Card className="overflow-hidden group cursor-pointer border-border/50 bg-card/50">
                       <Image
                           src={image.imageUrl}
                           alt={image.description}

@@ -18,7 +18,7 @@ const amenitiesList = [
 
 export function Amenities() {
   return (
-    <section id="amenities" className="py-20 md:py-28 bg-card">
+    <section id="amenities" className="py-20 md:py-28 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">World-Class Amenities</h2>
@@ -28,7 +28,7 @@ export function Amenities() {
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
               {amenitiesList.map((amenity, index) => (
                 <DialogTrigger asChild key={index}>
-                    <Card className="text-center p-6 flex flex-col items-center justify-center transition-all duration-300 hover:bg-primary/10 hover:shadow-lg cursor-pointer group">
+                    <Card className="text-center p-6 flex flex-col items-center justify-center transition-all duration-300 hover:bg-primary/10 hover:shadow-lg hover:-translate-y-1 cursor-pointer group bg-card/50 backdrop-blur-sm border-border/50">
                       <CardContent className="p-0 flex flex-col items-center gap-4">
                         <div className="bg-primary/20 p-4 rounded-full relative group-hover:scale-110 transition-transform">
                            <div className="absolute inset-0 bg-primary/20 rounded-full animate-ping"></div>

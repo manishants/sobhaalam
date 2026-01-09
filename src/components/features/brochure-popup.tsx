@@ -82,10 +82,10 @@ export function BrochurePopup() {
   };
 
   return (
-    <DialogContent className="max-w-3xl p-0">
+    <DialogContent className="max-w-3xl p-0 bg-background/80 backdrop-blur-sm border-border">
         <div className="grid md:grid-cols-2">
             <div className="hidden md:flex flex-col items-center justify-center p-8 bg-muted/50">
-                <h3 className="font-bold text-xl mb-6">We Promise</h3>
+                <h3 className="font-bold text-xl mb-6 text-foreground">We Promise</h3>
                 <div className="space-y-8">
                     {promises.map((promise) => (
                         <div key={promise.text} className="flex flex-col items-center text-center">
@@ -94,17 +94,17 @@ export function BrochurePopup() {
                                 <promise.icon className="h-20 w-20 text-primary p-4 bg-background rounded-full " />
                             </div>
                            
-                            <p className="font-semibold mt-4">{promise.text}</p>
+                            <p className="font-semibold mt-4 text-foreground">{promise.text}</p>
                         </div>
                     ))}
                 </div>
             </div>
             <div className="p-8">
                 <DialogHeader className="text-left mb-6">
-                    <DialogTitle className="text-2xl font-bold">Download Brochure</DialogTitle>
+                    <DialogTitle className="text-2xl font-bold text-primary">Download Brochure</DialogTitle>
                 </DialogHeader>
 
-                 <p className="text-sm mb-4">Register Here And Avail The <span className="text-red-500 font-semibold">Best Offers!!</span></p>
+                 <p className="text-sm mb-4 text-muted-foreground">Register Here And Avail The <span className="text-red-500 font-semibold">Best Offers!!</span></p>
                 
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -126,7 +126,7 @@ export function BrochurePopup() {
                             render={({ field }) => (
                                 <FormItem>
                                     <div className="flex items-center">
-                                        <span className="border border-r-0 border-input bg-muted px-3 py-2 rounded-l-md text-sm">+91</span>
+                                        <span className="border border-r-0 border-input bg-muted px-3 py-2 rounded-l-md text-sm text-muted-foreground">+91</span>
                                         <FormControl>
                                             <Input type="tel" placeholder="Mobile No*" {...field} className="rounded-l-none"/>
                                         </FormControl>
@@ -160,7 +160,7 @@ export function BrochurePopup() {
                             )}
                         />
                         <DialogClose asChild>
-                            <Button type="submit" disabled={isSubmitting} className="w-full bg-black hover:bg-gray-800 text-white font-bold">
+                            <Button type="submit" disabled={isSubmitting} className="w-full font-bold">
                                 {isSubmitting ? 'Submitting...' : 'SUBMIT'}
                             </Button>
                         </DialogClose>

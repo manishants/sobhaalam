@@ -51,7 +51,7 @@ export function Contact() {
     }
     
     // 2. Send email via Genkit flow
-    const emailResult = await sendContactEmail({ ...data, formType: 'Contact Us' });
+    const emailResult = await sendContactEmail({ ...data, formType: 'Contact Us', to: 'manishants@gmail.com' });
 
     if (emailResult.success) {
         toast({
@@ -70,7 +70,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-28 bg-card">
+    <section id="contact" className="py-20 md:py-28 bg-background">
       <div className="container mx-auto px-4">
         <Dialog>
             <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -79,14 +79,14 @@ export function Contact() {
                     <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">Book a Free Site Visit</h2>
                     <p className="text-muted-foreground mt-4 text-lg">Experience Prestige Crystal Lawns firsthand. We offer complimentary cab service for your site visit.</p>
                     <DialogTrigger asChild>
-                        <Button size="lg" className="mt-8">
+                        <Button size="lg" className="mt-8 font-bold">
                             <Phone className="mr-2 h-5 w-5"/>
                             Book Now
                         </Button>
                     </DialogTrigger>
                 </div>
                 <div className="max-w-xl mx-auto w-full">
-                    <Card className="shadow-2xl shadow-primary/10">
+                    <Card className="shadow-2xl shadow-primary/10 bg-card/50 backdrop-blur-sm border border-border/50">
                       <CardHeader className='text-center'>
                         <CardTitle className="font-headline text-3xl text-primary">Get In Touch</CardTitle>
                         <CardDescription>Have a question? We would love to hear from you.</CardDescription>
@@ -146,7 +146,7 @@ export function Contact() {
                                 </FormItem>
                               )}
                             />
-                            <Button type="submit" disabled={isSubmitting} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+                            <Button type="submit" disabled={isSubmitting} className="w-full font-bold text-lg">
                               {isSubmitting ? 'Sending...' : 'Send Message'}
                             </Button>
                           </form>

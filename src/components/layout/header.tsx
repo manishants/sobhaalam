@@ -58,15 +58,15 @@ export function Header() {
   };
 
   return (
-    <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${isScrolled ? 'border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60' : 'bg-transparent'}`}>
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-sm">
       <div className="container flex h-16 items-center mx-auto px-4">
         <Link href="/" className="flex items-center gap-2 mr-6">
           <Building2 className="h-7 w-7 text-primary" />
-          <span className={`font-bold text-xl font-headline transition-colors ${isScrolled ? 'text-foreground' : 'text-white'}`}>Prestige Crystal Lawns</span>
+          <span className="font-bold text-xl font-headline text-foreground">Prestige Crystal Lawns</span>
         </Link>
         <nav className="hidden lg:flex items-center space-x-4 text-sm font-medium">
           {navLinks.map(link => (
-            <Link key={link.href + link.label} href={link.href} onClick={(e) => handleLinkClick(e, link.href)} className={`transition-colors hover:text-primary ${activeLink === link.href ? 'text-primary' : (isScrolled ? 'text-foreground' : 'text-white')}`}>
+            <Link key={link.href + link.label} href={link.href} onClick={(e) => handleLinkClick(e, link.href)} className={`transition-colors hover:text-primary ${activeLink === link.href ? 'text-primary' : 'text-muted-foreground'}`}>
               {link.label}
             </Link>
           ))}
@@ -84,7 +84,7 @@ export function Header() {
             <div className="lg:hidden">
                 <Sheet>
                     <SheetTrigger asChild>
-                        <Button variant="ghost" size="icon" className={`${isScrolled ? 'text-foreground' : 'text-white'} hover:bg-white/10`}>
+                        <Button variant="ghost" size="icon" className="text-foreground hover:bg-accent">
                             <Menu className="h-6 w-6" />
                         </Button>
                     </SheetTrigger>
@@ -92,7 +92,7 @@ export function Header() {
                         <nav className="flex flex-col space-y-4 mt-8">
                             {navLinks.map(link => (
                                 <SheetClose asChild key={link.href + link.label}>
-                                  <Link href={link.href} onClick={(e) => handleLinkClick(e, link.href)} className={`text-lg transition-colors hover:text-primary ${activeLink === link.href ? 'text-primary' : ''}`}>
+                                  <Link href={link.href} onClick={(e) => handleLinkClick(e, link.href)} className={`text-lg transition-colors hover:text-primary ${activeLink === link.href ? 'text-primary' : 'text-foreground'}`}>
                                       {link.label}
                                   </Link>
                                 </SheetClose>

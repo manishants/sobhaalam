@@ -5,7 +5,7 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { FirebaseClientProvider } from '@/firebase/client-provider';
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Prestige Crystal Lawns',
   description: 'Discover Prestige Crystal Lawns, a luxurious residential project with spacious apartments and world-class amenities.',
 };
@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

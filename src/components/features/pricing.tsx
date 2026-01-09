@@ -13,6 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Card } from '../ui/card';
 
 const priceData = [
     {
@@ -45,10 +46,10 @@ export function Pricing() {
 
                 <Dialog>
                     <div className="grid lg:grid-cols-3 gap-8 items-start max-w-6xl mx-auto">
-                        <div className="lg:col-span-2 bg-card p-4 rounded-lg shadow-lg">
+                        <Card className="lg:col-span-2 bg-card/50 backdrop-blur-sm border-border/50 p-4 rounded-lg shadow-lg">
                             <Table>
                                 <TableHeader>
-                                    <TableRow>
+                                    <TableRow className='border-border/30'>
                                         <TableHead className="font-bold text-foreground">Type</TableHead>
                                         <TableHead className="font-bold text-foreground">Carpet Area</TableHead>
                                         <TableHead className="font-bold text-foreground">Price</TableHead>
@@ -57,36 +58,38 @@ export function Pricing() {
                                 </TableHeader>
                                 <TableBody>
                                     {priceData.map((plan, index) => (
-                                        <TableRow key={index}>
-                                            <TableCell>{plan.type}</TableCell>
+                                        <TableRow key={index} className='border-border/30'>
+                                            <TableCell className='font-medium'>{plan.type}</TableCell>
                                             <TableCell>{plan.area}</TableCell>
-                                            <TableCell>{plan.price}</TableCell>
+                                            <TableCell className='text-primary font-semibold'>{plan.price}</TableCell>
                                             <TableCell>
                                                 <DialogTrigger asChild>
-                                                    <Button variant="default" className="bg-black hover:bg-gray-800 text-white">Price Breakup</Button>
+                                                    <Button variant="default">Price Breakup</Button>
                                                 </DialogTrigger>
                                             </TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>
                             </Table>
-                        </div>
+                        </Card>
 
                         <div className="relative text-center">
-                             <p className="absolute -right-12 top-1/2 -translate-y-1/2 -rotate-90 text-4xl font-bold tracking-widest text-muted-foreground/50 hidden lg:block">Price</p>
+                             <p className="absolute -right-12 top-1/2 -translate-y-1/2 -rotate-90 text-4xl font-bold tracking-widest text-muted-foreground/10 hidden lg:block">Price</p>
                             <DialogTrigger asChild>
                                 <div className="cursor-pointer group">
-                                    {costingDetailsImage && (
-                                        <Image
-                                            src={costingDetailsImage.imageUrl}
-                                            alt={costingDetailsImage.description}
-                                            width={400}
-                                            height={500}
-                                            className="w-full h-auto object-contain border rounded-lg p-2 bg-card shadow-lg group-hover:shadow-primary/20 transition-shadow"
-                                            data-ai-hint={costingDetailsImage.imageHint}
-                                        />
-                                    )}
-                                    <div className="bg-black text-white p-3 mt-[-10px] relative z-10 rounded-b-lg">
+                                    <Card className="bg-card/50 backdrop-blur-sm border-border/50 p-2">
+                                        {costingDetailsImage && (
+                                            <Image
+                                                src={costingDetailsImage.imageUrl}
+                                                alt={costingDetailsImage.description}
+                                                width={400}
+                                                height={500}
+                                                className="w-full h-auto object-contain rounded-lg group-hover:shadow-primary/20 transition-shadow"
+                                                data-ai-hint={costingDetailsImage.imageHint}
+                                            />
+                                        )}
+                                    </Card>
+                                    <div className="bg-black/80 text-white p-3 mt-[-10px] relative z-10 rounded-b-lg">
                                         <h3 className="font-semibold text-lg">Complete Costing Details</h3>
                                     </div>
                                 </div>

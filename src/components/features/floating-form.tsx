@@ -79,20 +79,20 @@ export function FloatingForm() {
   };
 
   return (
-       <div className="hidden lg:block fixed top-16 right-0 h-[calc(100vh-4rem)] w-96 bg-card text-foreground z-20 border-l">
+       <div className="hidden lg:block fixed top-16 right-0 h-[calc(100vh-4rem)] w-96 bg-background/80 backdrop-blur-sm text-foreground z-20 border-l border-border/60">
             <ScrollArea className="h-full">
                 <div className="p-6">
                     <div className='flex flex-col items-center gap-2 mb-4'>
                         <Button variant='outline' className='w-full'>Organize Site Visit</Button>
                          <div className='flex items-center gap-2 text-sm'>
-                            <a href="tel:+918951142439" className='text-green-600 font-semibold flex items-center gap-2 hover:underline'> <PhoneCall className='inline h-4 w-4'/>+91 8951142439</a>
+                            <a href="tel:+918951142439" className='text-primary font-semibold flex items-center gap-2 hover:underline'> <PhoneCall className='inline h-4 w-4'/>+91 8951142439</a>
                          </div>
                         <Button className='w-full'><PhoneCall className='mr-2 h-4 w-4'/>Request Call Back</Button>
                     </div>
 
                     <Card className="bg-transparent border-none shadow-none">
                         <CardHeader className="text-center p-2">
-                            <CardTitle className="text-xl font-headline">Pre-Register here for Best Offers</CardTitle>
+                            <CardTitle className="text-xl font-headline text-primary">Pre-Register here for Best Offers</CardTitle>
                         </CardHeader>
                         <CardContent className="p-2">
                             <Form {...form}>
@@ -115,7 +115,7 @@ export function FloatingForm() {
                                         render={({ field }) => (
                                             <FormItem>
                                                 <div className="flex items-center">
-                                                    <span className="border border-r-0 border-input bg-muted px-3 py-2 rounded-l-md text-sm">+91</span>
+                                                    <span className="border border-r-0 border-input bg-muted px-3 py-2 rounded-l-md text-sm text-muted-foreground">+91</span>
                                                     <FormControl>
                                                         <Input type="tel" placeholder="Mobile No*" {...field} className="rounded-l-none"/>
                                                     </FormControl>

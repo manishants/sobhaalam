@@ -21,8 +21,8 @@ export function Location() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
               <DialogTrigger asChild>
                 <div className="cursor-pointer">
-                  <h3 className="text-xl font-bold text-center mb-4">Map View</h3>
-                  <Card className="overflow-hidden rounded-lg shadow-xl aspect-video">
+                  <h3 className="text-xl font-bold text-center mb-4 text-foreground">Map View</h3>
+                  <Card className="overflow-hidden rounded-lg shadow-xl aspect-video bg-background/50 border-border/50">
                       <iframe
                           src={projectLocationUrl}
                           width="100%"
@@ -37,9 +37,9 @@ export function Location() {
               </DialogTrigger>
               <DialogTrigger asChild>
                 <div className="cursor-pointer">
-                  <h3 className="text-xl font-bold text-center mb-4">Location Map</h3>
+                  <h3 className="text-xl font-bold text-center mb-4 text-foreground">Location Map</h3>
                   {mapImage && (
-                      <Card className="overflow-hidden rounded-lg shadow-xl">
+                      <Card className="overflow-hidden rounded-lg shadow-xl bg-background/50 border-border/50">
                           <Image
                               src={mapImage.imageUrl}
                               alt={mapImage.description}
