@@ -47,13 +47,13 @@ const sendContactEmailFlow = ai.defineFlow(
     }
 
     const toEmail = process.env.TO_EMAIL_ADDRESS;
-    const fromEmail = process.env.FROM_EMAIL_ADDRESS || 'onboarding@resend.dev'; // Resend requires a 'from' address.
+    const fromEmail = 'Sobha Hoskote Lead <onboarding@resend.dev>'; // Using Resend's default alias with a custom name.
 
     try {
       await resend.emails.send({
         from: fromEmail,
         to: toEmail,
-        subject: `New Submission from ${input.formType} Form`,
+        subject: `Sobha Hoskote Lead via Blowkida - ${input.formType}`,
         html: `
           <h1>New Form Submission</h1>
           <p><strong>Form:</strong> ${input.formType}</p>
