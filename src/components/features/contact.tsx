@@ -12,6 +12,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useFirebase } from '@/firebase';
 import { collection } from 'firebase/firestore';
 import { addDocumentNonBlocking } from '@/firebase/non-blocking-updates';
+import { sendContactEmail } from '@/ai/flows/send-contact-email';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters.'),
@@ -34,26 +35,33 @@ export function Contact() {
   const { formState: { isSubmitting } } = form;
 
   const onSubmit: SubmitHandler<ContactFormValues> = async (data) => {
-    if (!firestore) {
+    // 1. Save to Firestore
+    if (firestore) {
+      const submissionData = {
+          ...data,
+          submissionDate: new Date().toISOString(),
+          formType: 'Contact Us',
+      };
+      addDocumentNonBlocking(collection(firestore, 'contact_form_submissions'), submissionData);
+    } else {
+       console.warn("Firestore is not available. Skipping database submission.");
+    }
+    
+    // 2. Send email via Genkit flow
+    const emailResult = await sendContactEmail({ ...data, formType: 'Contact Us' });
+
+    if (emailResult.success) {
+        toast({
+            title: "Message Sent!",
+            description: "Thank you for reaching out. We will get back to you shortly.",
+        });
+    } else {
         toast({
             variant: "destructive",
-            title: "Error",
-            description: "Firestore is not available.",
+            title: "Something went wrong",
+            description: "There was an issue sending your message. Please try again later.",
         });
-        return;
     }
-
-    const submissionData = {
-        ...data,
-        submissionDate: new Date().toISOString(),
-    };
-    
-    addDocumentNonBlocking(collection(firestore, 'contact_form_submissions'), submissionData);
-
-    toast({
-        title: "Message Sent!",
-        description: "Thank you for reaching out. We will get back to you shortly.",
-    });
 
     form.reset();
   };

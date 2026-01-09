@@ -14,11 +14,12 @@ import { useFirebase } from '@/firebase';
 import { addDocumentNonBlocking } from '@/firebase/non-blocking-updates';
 import { collection } from 'firebase/firestore';
 import { Textarea } from '../ui/textarea';
+import { sendContactEmail } from '@/ai/flows/send-contact-email';
 
 const preRegisterSchema = z.object({
   name: z.string().min(2, 'Name is required.'),
-  mobile: z.string().min(10, 'Valid mobile number is required.'),
   email: z.string().email('Invalid email address.'),
+  mobile: z.string().min(10, 'Valid mobile number is required.'),
   comment: z.string().optional(),
 });
 
@@ -37,27 +38,43 @@ export function Hero() {
   const { formState: { isSubmitting } } = form;
 
   const onSubmit: SubmitHandler<PreRegisterFormValues> = async (data) => {
-    if (!firestore) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Firestore is not available.",
-      });
-      return;
+    // 1. Save to Firestore
+    if (firestore) {
+      const submissionData = {
+        name: data.name,
+        email: data.email,
+        phone: data.mobile,
+        comment: data.comment,
+        submissionDate: new Date().toISOString(),
+        formType: 'Pre-Register',
+      };
+      addDocumentNonBlocking(collection(firestore, 'contact_form_submissions'), submissionData);
+    } else {
+      console.warn("Firestore is not available. Skipping database submission.");
+    }
+    
+    // 2. Send email via Genkit flow
+    const emailResult = await sendContactEmail({
+      name: data.name,
+      email: data.email,
+      phone: data.mobile,
+      comment: data.comment,
+      formType: 'Pre-Register',
+    });
+
+    if (emailResult.success) {
+        toast({
+          title: 'Request Received!',
+          description: "Thank you for registering! We will get back to you with the best offers.",
+        });
+    } else {
+        toast({
+            variant: "destructive",
+            title: "Something went wrong",
+            description: "There was an issue with your registration. Please try again later.",
+        });
     }
 
-    const submissionData = {
-      ...data,
-      type: 'pre_register',
-      submissionDate: new Date().toISOString(),
-    };
-    
-    addDocumentNonBlocking(collection(firestore, 'contact_form_submissions'), submissionData);
-
-    toast({
-      title: 'Request Received!',
-      description: "Thank you for registering! We will get back to you with the best offers.",
-    });
     form.reset();
   };
 
