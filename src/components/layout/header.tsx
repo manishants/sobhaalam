@@ -24,7 +24,6 @@ const navLinks = [
     { href: '#gallery', label: 'Gallery' },
     { href: '#faq', label: 'FAQ' },
     { href: '#contact', label: 'Contact' },
-    { href: '#article', label: 'Article' },
 ];
 
 export function Header() {

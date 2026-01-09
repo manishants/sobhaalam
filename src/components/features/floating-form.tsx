@@ -90,9 +90,6 @@ export function FloatingForm() {
                            <DialogTrigger asChild>
                              <Button variant='outline' className='w-full'>Organize Site Visit</Button>
                            </DialogTrigger>
-                             <div className='flex items-center gap-2 text-sm'>
-                                <a href="tel:+918951142439" className='text-primary font-semibold flex items-center gap-2 hover:underline'> <PhoneCall className='inline h-4 w-4'/>+91 8951142439</a>
-                             </div>
                             <Button className='w-full'><PhoneCall className='mr-2 h-4 w-4'/>Request Call Back</Button>
                         </div>
 

@@ -6,8 +6,46 @@ import { Footer } from '@/components/layout/footer';
 import { FirebaseClientProvider } from '@/firebase/client-provider';
 
 export const metadata: Metadata = {
-  title: 'Sobha Hoskote | Premium 1, 2, 3 & 4 BHK Apartments in Hoskote, Bangalore',
-  description: 'Discover Sobha Hoskote, an iconic new residential development by Sobha Limited. Featuring East Bengaluru\'s tallest towers, it offers premium 1, 2, 3 & 4 BHK apartments with world-class amenities in the strategic location of Hoskote, Bangalore.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  title: {
+    default: 'Sobha Hoskote, Bangalore | Master Plan, Floor Plan, Price & EOI',
+    template: '%s | Sobha Hoskote'
+  },
+  description:
+    "Pre-launch premium apartments in Hoskote (OMR, NH-75). Explore master plan, floor plans, price list, amenities, location, and submit EOI for priority unit selection.",
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    type: 'website',
+    url: '/',
+    title: 'Sobha Hoskote, Bangalore | Master Plan, Floor Plan, Price & EOI',
+    description:
+      "Pre-launch premium apartments in Hoskote (OMR, NH-75). Explore master plan, floor plans, price list, amenities, location, and submit EOI for priority unit selection.",
+    images: [
+      {
+        url: '/images/sobha-hoskote-banner.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Sobha Hoskote Banner',
+      },
+    ],
+    siteName: 'Sobha Hoskote',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sobha Hoskote, Bangalore | Master Plan, Floor Plan, Price & EOI',
+    description:
+      "Pre-launch premium apartments in Hoskote (OMR, NH-75). Explore master plan, floor plans, price list, amenities, location, and submit EOI for priority unit selection.",
+    images: ['/images/sobha-hoskote-banner.webp'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  icons: {
+    icon: '/images/favicon.ico',
+  },
 };
 
 const realEstateListingLd = {
@@ -137,7 +175,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <link rel="icon" href="/images/sobha-logo.png" type="image/png" />
+        <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
