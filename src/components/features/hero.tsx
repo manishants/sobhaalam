@@ -16,6 +16,8 @@ import { collection } from 'firebase/firestore';
 import { Textarea } from '../ui/textarea';
 import { sendContactEmail } from '@/ai/flows/send-contact-email';
 import { useEffect, useState } from 'react';
+import { PhoneCall, BadgeIndianRupee, Car } from 'lucide-react';
+import { ScrollArea } from '../ui/scroll-area';
 
 const preRegisterSchema = z.object({
   name: z.string().min(2, 'Name is required.'),
@@ -96,7 +98,7 @@ export function Hero() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center text-white py-16 md:py-24">
+    <section id="home" className="relative min-h-screen flex items-center justify-start text-white py-16 md:py-24">
        {heroImages.map((image, index) => (
          <Image
             key={image.id}
@@ -109,10 +111,10 @@ export function Hero() {
           />
        ))}
       <div className="absolute inset-0 bg-black/60" />
-      <div className="relative z-10 container mx-auto px-4 grid lg:grid-cols-2 gap-8 items-center">
+      <div className="relative z-10 container mx-auto px-4 w-full">
         
         {/* Left Column */}
-        <div className="bg-background/80 backdrop-blur-sm text-foreground p-6 md:p-8 rounded-lg">
+        <div className="bg-background/80 backdrop-blur-sm text-foreground p-6 md:p-8 rounded-lg max-w-lg">
             <p className="text-sm font-semibold uppercase tracking-wider text-primary">Booking Open</p>
             <h1 className="text-3xl md:text-4xl font-bold font-headline mt-2">
                 Prestige Crystal Lawns
@@ -153,75 +155,88 @@ export function Hero() {
             </div>
         </div>
 
-        {/* Right Column */}
-        <div className="row-start-1 lg:col-start-2">
-            <Card className="bg-background/80 backdrop-blur-sm text-foreground">
-                <CardHeader className="text-center">
-                    <CardTitle className="text-2xl font-headline">Pre-Register here for Best Offers</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                            <FormField
-                                control={form.control}
-                                name="name"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormControl>
-                                            <Input placeholder="Name*" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                             <FormField
-                                control={form.control}
-                                name="mobile"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <div className="flex items-center">
-                                            <span className="border border-r-0 border-input bg-muted px-3 py-2 rounded-l-md text-sm">+91</span>
-                                            <FormControl>
-                                                <Input type="tel" placeholder="Mobile No*" {...field} className="rounded-l-none"/>
-                                            </FormControl>
-                                        </div>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="email"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormControl>
-                                            <Input type="email" placeholder="E-Mail Address*" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                             <FormField
-                                control={form.control}
-                                name="comment"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormControl>
-                                            <Textarea placeholder="Comment" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <Button type="submit" disabled={isSubmitting} className="w-full bg-black hover:bg-gray-800 text-white font-bold">
-                                {isSubmitting ? 'Submitting...' : 'SUBMIT'}
-                            </Button>
-                        </form>
-                    </Form>
-                </CardContent>
-            </Card>
-        </div>
       </div>
+
+      {/* Right Column - Floating Form */}
+       <div className="hidden lg:block fixed top-0 right-0 h-full w-96 bg-white dark:bg-card text-foreground z-20">
+            <ScrollArea className="h-full">
+                <div className="p-6">
+                    <div className='flex flex-col items-center gap-2 mb-4'>
+                        <Button variant='outline' className='w-full'>Organize Site Visit</Button>
+                         <div className='flex items-center gap-2 text-sm'>
+                            <p className='text-green-500'> <PhoneCall className='inline h-4 w-4 mr-1'/>+91 8951142439</p>
+                         </div>
+                        <Button className='w-full'><PhoneCall className='mr-2 h-4 w-4'/>Request Call Back</Button>
+                    </div>
+
+                    <Card className="bg-transparent border-none shadow-none">
+                        <CardHeader className="text-center p-2">
+                            <CardTitle className="text-xl font-headline">Pre-Register here for Best Offers</CardTitle>
+                        </CardHeader>
+                        <CardContent className="p-2">
+                            <Form {...form}>
+                                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                                    <FormField
+                                        control={form.control}
+                                        name="name"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormControl>
+                                                    <Input placeholder="Name*" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        control={form.control}
+                                        name="mobile"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <div className="flex items-center">
+                                                    <span className="border border-r-0 border-input bg-muted px-3 py-2 rounded-l-md text-sm">+91</span>
+                                                    <FormControl>
+                                                        <Input type="tel" placeholder="Mobile No*" {...field} className="rounded-l-none"/>
+                                                    </FormControl>
+                                                </div>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        control={form.control}
+                                        name="email"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormControl>
+                                                    <Input type="email" placeholder="E-Mail Address*" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        control={form.control}
+                                        name="comment"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormControl>
+                                                    <Textarea placeholder="Comment" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <Button type="submit" disabled={isSubmitting} className="w-full bg-black hover:bg-gray-800 text-white font-bold">
+                                        {isSubmitting ? 'Submitting...' : 'SUBMIT'}
+                                    </Button>
+                                </form>
+                            </Form>
+                        </CardContent>
+                    </Card>
+                </div>
+            </ScrollArea>
+        </div>
     </section>
   );
 }
