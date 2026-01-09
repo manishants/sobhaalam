@@ -13,8 +13,10 @@ import { addDocumentNonBlocking } from '@/firebase/non-blocking-updates';
 import { collection } from 'firebase/firestore';
 import { Textarea } from '../ui/textarea';
 import { sendContactEmail } from '@/ai/flows/send-contact-email';
-import { PhoneCall } from 'lucide-react';
+import { PhoneCall, Hand } from 'lucide-react';
 import { ScrollArea } from '../ui/scroll-area';
+import { Dialog, DialogTrigger, DialogContent } from '../ui/dialog';
+import { BrochurePopup } from './brochure-popup';
 
 const preRegisterSchema = z.object({
   name: z.string().min(2, 'Name is required.'),
@@ -79,84 +81,104 @@ export function FloatingForm() {
   };
 
   return (
+      <>
        <div className="hidden lg:block fixed top-16 right-0 h-[calc(100vh-4rem)] w-96 bg-background/80 backdrop-blur-sm text-foreground z-20 border-l border-border/60">
             <ScrollArea className="h-full">
-                <div className="p-6">
-                    <div className='flex flex-col items-center gap-2 mb-4'>
-                        <Button variant='outline' className='w-full'>Organize Site Visit</Button>
-                         <div className='flex items-center gap-2 text-sm'>
-                            <a href="tel:+918951142439" className='text-primary font-semibold flex items-center gap-2 hover:underline'> <PhoneCall className='inline h-4 w-4'/>+91 8951142439</a>
-                         </div>
-                        <Button className='w-full'><PhoneCall className='mr-2 h-4 w-4'/>Request Call Back</Button>
-                    </div>
+                <div className="p-6 pb-12">
+                    <Dialog>
+                        <div className='flex flex-col items-center gap-2 mb-4'>
+                           <DialogTrigger asChild>
+                             <Button variant='outline' className='w-full'>Organize Site Visit</Button>
+                           </DialogTrigger>
+                             <div className='flex items-center gap-2 text-sm'>
+                                <a href="tel:+918951142439" className='text-primary font-semibold flex items-center gap-2 hover:underline'> <PhoneCall className='inline h-4 w-4'/>+91 8951142439</a>
+                             </div>
+                            <Button className='w-full'><PhoneCall className='mr-2 h-4 w-4'/>Request Call Back</Button>
+                        </div>
 
-                    <Card className="bg-transparent border-none shadow-none">
-                        <CardHeader className="text-center p-2">
-                            <CardTitle className="text-xl font-headline text-primary">Pre-Register here for Best Offers</CardTitle>
-                        </CardHeader>
-                        <CardContent className="p-2">
-                            <Form {...form}>
-                                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                                    <FormField
-                                        control={form.control}
-                                        name="name"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormControl>
-                                                    <Input placeholder="Name*" {...field} />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
-                                        name="mobile"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <div className="flex items-center">
-                                                    <span className="border border-r-0 border-input bg-muted px-3 py-2 rounded-l-md text-sm text-muted-foreground">+91</span>
+                        <Card className="bg-transparent border-none shadow-none">
+                            <CardHeader className="text-center p-2">
+                                <CardTitle className="text-xl font-headline text-primary">Pre-Register here for Best Offers</CardTitle>
+                            </CardHeader>
+                            <CardContent className="p-2">
+                                <Form {...form}>
+                                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                                        <FormField
+                                            control={form.control}
+                                            name="name"
+                                            render={({ field }) => (
+                                                <FormItem>
                                                     <FormControl>
-                                                        <Input type="tel" placeholder="Mobile No*" {...field} className="rounded-l-none"/>
+                                                        <Input placeholder="Name*" {...field} />
                                                     </FormControl>
-                                                </div>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
-                                        name="email"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormControl>
-                                                    <Input type="email" placeholder="E-Mail Address*" {...field} />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
-                                        name="comment"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormControl>
-                                                    <Textarea placeholder="Comment" {...field} />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <Button type="submit" disabled={isSubmitting} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold">
-                                        {isSubmitting ? 'Submitting...' : 'SUBMIT'}
-                                    </Button>
-                                </form>
-                            </Form>
-                        </CardContent>
-                    </Card>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="mobile"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <div className="flex items-center">
+                                                        <span className="border border-r-0 border-input bg-muted px-3 py-2 rounded-l-md text-sm text-muted-foreground">+91</span>
+                                                        <FormControl>
+                                                            <Input type="tel" placeholder="Mobile No*" {...field} className="rounded-l-none"/>
+                                                        </FormControl>
+                                                    </div>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="email"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormControl>
+                                                        <Input type="email" placeholder="E-Mail Address*" {...field} />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="comment"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormControl>
+                                                        <Textarea placeholder="Comment" {...field} />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <Button type="submit" disabled={isSubmitting} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold">
+                                            {isSubmitting ? 'Submitting...' : 'SUBMIT'}
+                                        </Button>
+                                    </form>
+                                </Form>
+                            </CardContent>
+                        </Card>
+                        <BrochurePopup />
+                    </Dialog>
                 </div>
             </ScrollArea>
         </div>
+        
+        {/* Mobile Floating Button */}
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-30 p-4 bg-background/80 backdrop-blur-sm border-t border-border/50">
+            <Dialog>
+                <DialogTrigger asChild>
+                    <Button className="w-full font-bold text-lg">
+                        <Hand className="mr-2 h-5 w-5"/>
+                        Pre-Register for Best Offer
+                    </Button>
+                </DialogTrigger>
+                <BrochurePopup />
+            </Dialog>
+        </div>
+      </>
   );
 }

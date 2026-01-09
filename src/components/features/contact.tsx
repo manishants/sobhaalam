@@ -51,7 +51,7 @@ export function Contact() {
     }
     
     // 2. Send email via Genkit flow
-    const emailResult = await sendContactEmail({ ...data, formType: 'Contact Us', to: 'manishants@gmail.com' });
+    const emailResult = await sendContactEmail({ ...data, formType: 'Contact Us' });
 
     if (emailResult.success) {
         toast({

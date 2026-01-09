@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useEffect, useState } from 'react';
+import { Dialog, DialogTrigger } from '../ui/dialog';
+import { BrochurePopup } from './brochure-popup';
 
 const heroImages = [
   PlaceHolderImages.find(p => p.id === 'hero-background'),
@@ -40,7 +42,6 @@ export function Hero() {
       <div className="absolute inset-0 bg-black/70" />
       <div className="relative z-10 container mx-auto px-4 w-full">
         
-        {/* Left Column */}
         <div className="bg-background/80 backdrop-blur-sm text-foreground p-6 md:p-8 rounded-lg max-w-lg shadow-2xl shadow-black/30">
             <p className="text-sm font-semibold uppercase tracking-wider text-primary">Booking Open</p>
             <h1 className="text-3xl md:text-4xl font-bold font-headline mt-2 text-foreground">
@@ -49,7 +50,7 @@ export function Hero() {
             <p className="text-lg text-muted-foreground mt-1">At IVC Road, Bangalore</p>
             <p className="text-sm text-muted-foreground">By Prestige Group</p>
 
-            <div className="grid grid-cols-3 gap-4 mt-6 text-sm text-muted-foreground">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6 text-sm text-muted-foreground">
                 <div>
                     <p className="font-semibold text-foreground">Development Size</p>
                     <p>24 Acres</p>
@@ -77,7 +78,12 @@ export function Hero() {
             <div className="mt-6 text-center">
                 <p className="font-semibold text-foreground">30X50, 60X40, 50X80 Plots</p>
                 <p className="text-4xl font-bold mt-2 text-primary drop-shadow-lg">₹ 1.38 Cr* Onwards</p>
-                <Button size="lg" className="mt-4 w-full md:w-auto font-bold text-lg">Enquire Now</Button>
+                <Dialog>
+                    <DialogTrigger asChild>
+                      <Button size="lg" className="mt-4 w-full md:w-auto font-bold text-lg">Enquire Now</Button>
+                    </DialogTrigger>
+                    <BrochurePopup />
+                </Dialog>
                 <p className="text-xs text-muted-foreground mt-2">Rera: PR/300925/008132</p>
             </div>
         </div>
