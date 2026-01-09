@@ -26,9 +26,11 @@ const navLinks = [
 
 export function Header() {
   const [activeLink, setActiveLink] = useState('#home');
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
       const sections = navLinks.map(link => document.querySelector(link.href)).filter(Boolean);
       const scrollPosition = window.scrollY + 150; // Add offset for better accuracy
 
@@ -49,20 +51,22 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [activeLink]);
 
-  const handleLinkClick = (href: string) => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
     setActiveLink(href);
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${isScrolled ? 'border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60' : 'bg-transparent'}`}>
       <div className="container flex h-16 items-center mx-auto px-4">
         <Link href="/" className="flex items-center gap-2 mr-6">
           <Building2 className="h-7 w-7 text-primary" />
-          <span className="font-bold text-xl font-headline">Prestige Crystal Lawns</span>
+          <span className={`font-bold text-xl font-headline transition-colors ${isScrolled ? 'text-foreground' : 'text-white'}`}>Prestige Crystal Lawns</span>
         </Link>
         <nav className="hidden lg:flex items-center space-x-4 text-sm font-medium">
           {navLinks.map(link => (
-            <Link key={link.href + link.label} href={link.href} onClick={() => handleLinkClick(link.href)} className={`transition-colors hover:text-primary ${activeLink === link.href ? 'text-primary' : ''}`}>
+            <Link key={link.href + link.label} href={link.href} onClick={(e) => handleLinkClick(e, link.href)} className={`transition-colors hover:text-primary ${activeLink === link.href ? 'text-primary' : (isScrolled ? 'text-foreground' : 'text-white')}`}>
               {link.label}
             </Link>
           ))}
@@ -80,7 +84,7 @@ export function Header() {
             <div className="lg:hidden">
                 <Sheet>
                     <SheetTrigger asChild>
-                        <Button variant="ghost" size="icon">
+                        <Button variant="ghost" size="icon" className={`${isScrolled ? 'text-foreground' : 'text-white'} hover:bg-white/10`}>
                             <Menu className="h-6 w-6" />
                         </Button>
                     </SheetTrigger>
@@ -88,7 +92,7 @@ export function Header() {
                         <nav className="flex flex-col space-y-4 mt-8">
                             {navLinks.map(link => (
                                 <SheetClose asChild key={link.href + link.label}>
-                                  <Link href={link.href} onClick={() => handleLinkClick(link.href)} className={`text-lg transition-colors hover:text-primary ${activeLink === link.href ? 'text-primary' : ''}`}>
+                                  <Link href={link.href} onClick={(e) => handleLinkClick(e, link.href)} className={`text-lg transition-colors hover:text-primary ${activeLink === link.href ? 'text-primary' : ''}`}>
                                       {link.label}
                                   </Link>
                                 </SheetClose>
