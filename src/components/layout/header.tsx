@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { Building2, Menu, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -9,6 +11,7 @@ import {
 } from "@/components/ui/sheet";
 import { BrochurePopup } from '@/components/features/brochure-popup';
 import { Dialog, DialogTrigger } from '../ui/dialog';
+import { useEffect, useState } from 'react';
 
 const navLinks = [
     { href: '#home', label: 'Home' },
@@ -22,6 +25,27 @@ const navLinks = [
 ];
 
 export function Header() {
+  const [activeLink, setActiveLink] = useState('#home');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navLinks.map(link => document.querySelector(link.href)).filter(Boolean);
+      const scrollPosition = window.scrollY + 150; // Add offset for better accuracy
+
+      for (const section of sections) {
+        if (section && section instanceof HTMLElement) {
+          if (scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.offsetHeight) {
+            setActiveLink(`#${section.id}`);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center mx-auto px-4">
@@ -31,7 +55,7 @@ export function Header() {
         </Link>
         <nav className="hidden lg:flex items-center space-x-4 text-sm font-medium">
           {navLinks.map(link => (
-            <Link key={link.href + link.label} href={link.href} className="transition-colors hover:text-primary">
+            <Link key={link.href + link.label} href={link.href} className={`transition-colors hover:text-primary ${activeLink === link.href ? 'text-primary' : ''}`}>
               {link.label}
             </Link>
           ))}

@@ -17,11 +17,11 @@ export default function Home() {
         <Hero />
         <main className="overflow-x-hidden">
           <Overview />
+          <Pricing />
           <Highlights />
           <Location />
           <MasterPlan />
           <FloorPlans />
-          <Pricing />
           <Amenities />
           <Gallery />
           <Contact />
