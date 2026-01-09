@@ -17,19 +17,19 @@ import { Card } from '../ui/card';
 
 const priceData = [
     {
-        type: "30X50",
+        type: "30x40",
+        area: "1200 Sq Ft",
+        price: "₹78 Lakhs* Onwards",
+    },
+    {
+        type: "30x50",
         area: "1500 Sq Ft",
-        price: "₹1.38 Cr* Onwards",
+        price: "₹97 Lakhs* Onwards",
     },
     {
-        type: "60X40",
+        type: "40x60",
         area: "2400 sq ft",
-        price: "₹2.22 Cr* Onwards",
-    },
-    {
-        type: "50X80",
-        area: "4000 sq ft",
-        price: "₹3.7 Cr* Onwards",
+        price: "₹1.55 Cr* Onwards",
     }
 ];
 
@@ -41,7 +41,7 @@ export function Pricing() {
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-3xl mx-auto mb-12">
                     <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">Price List</h2>
-                    <p className="text-muted-foreground mt-4 text-lg">Affordable luxury with flexible payment plans. Find the perfect home that fits your budget.</p>
+                    <p className="text-muted-foreground mt-4 text-lg">Affordable luxury with flexible payment plans. Find the perfect plot that fits your budget at Sobha Hoskote.</p>
                 </div>
 
                 <Dialog>
@@ -51,7 +51,7 @@ export function Pricing() {
                                 <TableHeader>
                                     <TableRow className='border-border/30'>
                                         <TableHead className="font-bold text-foreground">Type</TableHead>
-                                        <TableHead className="font-bold text-foreground">Carpet Area</TableHead>
+                                        <TableHead className="font-bold text-foreground">Area</TableHead>
                                         <TableHead className="font-bold text-foreground">Price</TableHead>
                                         <TableHead></TableHead>
                                     </TableRow>

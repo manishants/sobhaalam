@@ -6,8 +6,8 @@ import { Footer } from '@/components/layout/footer';
 import { FirebaseClientProvider } from '@/firebase/client-provider';
 
 export const metadata = {
-  title: 'Prestige Crystal Lawns',
-  description: 'Discover Prestige Crystal Lawns, a luxurious residential project with spacious apartments and world-class amenities.',
+  title: 'Sobha Hoskote | Premium Plots in Hoskote, Bangalore',
+  description: 'Discover Sobha Hoskote, a new luxury residential plotted development by Sobha Limited. Offering premium plots with world-class amenities in the strategic location of Hoskote, Bangalore.',
 };
 
 export default function RootLayout({

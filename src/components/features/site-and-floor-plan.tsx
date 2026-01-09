@@ -15,7 +15,7 @@ export function SiteAndFloorPlan() {
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">Site & Floor Plan</h2>
-            <p className="text-muted-foreground mt-4 text-lg">Explore the thoughtfully designed layout and spacious floor plans of Prestige Crystal Lawns.</p>
+            <p className="text-muted-foreground mt-4 text-lg">Explore the thoughtfully designed layout and spacious plot plans of Sobha Hoskote.</p>
         </div>
         
         <Dialog>
@@ -50,7 +50,7 @@ export function SiteAndFloorPlan() {
                                     data-ai-hint={floorPlanImage.imageHint}
                                 />
                             </Card>
-                            <h3 className="text-center font-bold text-xl mt-4 text-foreground">Floor Plan</h3>
+                            <h3 className="text-center font-bold text-xl mt-4 text-foreground">Plot Plan</h3>
                         </div>
                     </DialogTrigger>
                 )}

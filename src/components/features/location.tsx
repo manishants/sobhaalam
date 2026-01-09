@@ -8,14 +8,14 @@ import { BrochurePopup } from './brochure-popup';
 
 export function Location() {
   const mapImage = PlaceHolderImages.find(p => p.id === 'location-map');
-  const projectLocationUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.13123041525!2d77.63398631526656!3d13.0910972907789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1971261a8a27%3A0x4642b323c6214151!2sPrestige%20Crystal%20Lawns!5e0!3m2!1sen!2sin!4v1688800000000";
+  const projectLocationUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31093.8966952445!2d77.77187431252988!3d13.04561081530669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae11a5d2df5845%3A0x871cb76b5a31a547!2sHoskote%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1688800000001";
 
   return (
     <section id="location" className="py-20 md:py-28 bg-card">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">Location Advantage</h2>
-            <p className="text-muted-foreground mt-4 text-lg">Strategically located to provide excellent connectivity to major IT hubs, schools, hospitals, and shopping centers.</p>
+            <p className="text-muted-foreground mt-4 text-lg">Strategically located in Hoskote to provide excellent connectivity to major IT hubs, schools, hospitals, and shopping centers.</p>
         </div>
         <Dialog>
           <div className="grid md:grid-cols-2 gap-8 items-center">

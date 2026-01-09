@@ -77,7 +77,7 @@ export function Contact() {
                 <div className="text-center md:text-left">
                     <Car className="mx-auto md:mx-0 text-primary h-24 w-24 mb-6" />
                     <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">Book a Free Site Visit</h2>
-                    <p className="text-muted-foreground mt-4 text-lg">Experience Prestige Crystal Lawns firsthand. We offer complimentary cab service for your site visit.</p>
+                    <p className="text-muted-foreground mt-4 text-lg">Experience Sobha Hoskote firsthand. We offer complimentary cab service for your site visit.</p>
                     <DialogTrigger asChild>
                         <Button size="lg" className="mt-8 font-bold">
                             <Phone className="mr-2 h-5 w-5"/>

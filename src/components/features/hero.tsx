@@ -45,23 +45,23 @@ export function Hero() {
         <div className="bg-background/80 backdrop-blur-sm text-foreground p-6 md:p-8 rounded-lg max-w-lg shadow-2xl shadow-black/30">
             <p className="text-sm font-semibold uppercase tracking-wider text-primary">Booking Open</p>
             <h1 className="text-3xl md:text-4xl font-bold font-headline mt-2 text-foreground">
-                Prestige Crystal Lawns
+                Sobha Hoskote
             </h1>
-            <p className="text-lg text-muted-foreground mt-1">At IVC Road, Bangalore</p>
-            <p className="text-sm text-muted-foreground">By Prestige Group</p>
+            <p className="text-lg text-muted-foreground mt-1">At Hoskote, Bangalore</p>
+            <p className="text-sm text-muted-foreground">By Sobha Limited</p>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6 text-sm text-muted-foreground">
                 <div>
                     <p className="font-semibold text-foreground">Development Size</p>
-                    <p>24 Acres</p>
+                    <p>50 Acres</p>
                 </div>
                 <div>
                     <p className="font-semibold text-foreground">No. of Units</p>
-                    <p>235 Units</p>
+                    <p>550+ Plots</p>
                 </div>
                 <div>
                     <p className="font-semibold text-foreground">Possession</p>
-                    <p>August 2029 Onwards</p>
+                    <p>December 2028 Onwards</p>
                 </div>
             </div>
 
@@ -76,15 +76,15 @@ export function Hero() {
             </div>
 
             <div className="mt-6 text-center">
-                <p className="font-semibold text-foreground">30X50, 60X40, 50X80 Plots</p>
-                <p className="text-4xl font-bold mt-2 text-primary drop-shadow-lg">₹ 1.38 Cr* Onwards</p>
+                <p className="font-semibold text-foreground">30x40, 30x50, 40x60 Plots</p>
+                <p className="text-4xl font-bold mt-2 text-primary drop-shadow-lg">₹ 78 Lakhs* Onwards</p>
                 <Dialog>
                     <DialogTrigger asChild>
                       <Button size="lg" className="mt-4 w-full md:w-auto font-bold text-lg">Enquire Now</Button>
                     </DialogTrigger>
                     <BrochurePopup />
                 </Dialog>
-                <p className="text-xs text-muted-foreground mt-2">Rera: PR/300925/008132</p>
+                <p className="text-xs text-muted-foreground mt-2">RERA No: PRM/KA/RERA/1251/308/PR/210321/004035</p>
             </div>
         </div>
 

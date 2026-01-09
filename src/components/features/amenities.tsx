@@ -22,7 +22,7 @@ export function Amenities() {
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">World-Class Amenities</h2>
-            <p className="text-muted-foreground mt-4 text-lg">Indulge in a lifestyle of comfort and convenience with a wide range of modern amenities.</p>
+            <p className="text-muted-foreground mt-4 text-lg">Indulge in a lifestyle of comfort and convenience with a wide range of modern amenities at Sobha Hoskote.</p>
         </div>
         <Dialog>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">

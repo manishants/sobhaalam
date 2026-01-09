@@ -29,7 +29,7 @@ export function VirtualTour() {
                 </div>
             </DialogTrigger>
             <h2 className="text-3xl md:text-4xl font-headline font-bold mt-4">VIRTUAL TOUR</h2>
-            <p className="text-lg mt-2 text-muted-foreground">Prestige Crystal Lawns At IVC Road, Bangalore</p>
+            <p className="text-lg mt-2 text-muted-foreground">Sobha Hoskote At Hoskote, Bangalore</p>
             <BrochurePopup />
         </Dialog>
       </div>
