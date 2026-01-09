@@ -21,7 +21,7 @@ const navLinks = [
     { href: '#amenities', label: 'Amenities' },
     { href: '#location', label: 'Location' },
     { href: '#gallery', label: 'Gallery' },
-    { href: '#', label: 'Virtual Site Tour' },
+    { href: '#virtual-tour', label: 'Virtual Site Tour' },
 ];
 
 export function Header() {
@@ -33,18 +33,25 @@ export function Header() {
       const scrollPosition = window.scrollY + 150; // Add offset for better accuracy
 
       for (const section of sections) {
-        if (section && section instanceof HTMLElement) {
-          if (scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.offsetHeight) {
-            setActiveLink(`#${section.id}`);
-            break;
-          }
+        if (section instanceof HTMLElement) {
+           if (scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.offsetHeight) {
+             const newActiveLink = `#${section.id}`;
+             if (newActiveLink !== activeLink) {
+                setActiveLink(newActiveLink);
+             }
+             break;
+           }
         }
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [activeLink]);
+
+  const handleLinkClick = (href: string) => {
+    setActiveLink(href);
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -55,7 +62,7 @@ export function Header() {
         </Link>
         <nav className="hidden lg:flex items-center space-x-4 text-sm font-medium">
           {navLinks.map(link => (
-            <Link key={link.href + link.label} href={link.href} className={`transition-colors hover:text-primary ${activeLink === link.href ? 'text-primary' : ''}`}>
+            <Link key={link.href + link.label} href={link.href} onClick={() => handleLinkClick(link.href)} className={`transition-colors hover:text-primary ${activeLink === link.href ? 'text-primary' : ''}`}>
               {link.label}
             </Link>
           ))}
@@ -79,9 +86,9 @@ export function Header() {
                     </SheetTrigger>
                     <SheetContent side="right">
                         <nav className="flex flex-col space-y-4 mt-8">
-                            {[...navLinks, { href: '#', label: 'Brochure' }].map(link => (
+                            {navLinks.map(link => (
                                 <SheetClose asChild key={link.href + link.label}>
-                                  <Link href={link.href} className="text-lg transition-colors hover:text-primary">
+                                  <Link href={link.href} onClick={() => handleLinkClick(link.href)} className={`text-lg transition-colors hover:text-primary ${activeLink === link.href ? 'text-primary' : ''}`}>
                                       {link.label}
                                   </Link>
                                 </SheetClose>

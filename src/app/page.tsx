@@ -10,6 +10,17 @@ import { Pricing } from '@/components/features/pricing';
 import { Location } from '@/components/features/location';
 import { FloatingForm } from '@/components/features/floating-form';
 
+// Placeholder for Virtual Site Tour
+const VirtualTour = () => (
+  <section id="virtual-tour" className="py-20 md:py-28 bg-card">
+    <div className="container mx-auto px-4 text-center">
+      <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">Virtual Site Tour</h2>
+      <p className="text-muted-foreground mt-4 text-lg">Coming Soon! Explore the property from the comfort of your home.</p>
+    </div>
+  </section>
+);
+
+
 export default function Home() {
   return (
     <div className="flex">
@@ -24,6 +35,7 @@ export default function Home() {
           <FloorPlans />
           <Amenities />
           <Gallery />
+          <VirtualTour />
           <Contact />
         </main>
       </div>
