@@ -3,12 +3,12 @@
  * @fileOverview A flow for sending contact form submissions as an email.
  *
  * - sendContactEmail - A function that handles sending the email.
- * - ContactEmailInput - The input type for the sendContactEmail function.
  */
 
 import { ai } from '@/ai/genkit';
 import { z } from 'zod';
 import { Resend } from 'resend';
+import { ContactEmailInputSchema, type ContactEmailInput } from '@/ai/schemas/contact-email-schema';
 
 // IMPORTANT: To enable email sending, you need to:
 // 1. Sign up for an account at https://resend.com
@@ -19,17 +19,6 @@ import { Resend } from 'resend';
 // 4. In Resend, verify the domain you want to send emails from.
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
-
-export const ContactEmailInputSchema = z.object({
-  name: z.string().describe('The name of the person submitting the form.'),
-  email: z.string().email().describe('The email of the person submitting the form.'),
-  phone: z.string().optional().describe('The phone number of the person submitting the form.'),
-  message: z.string().optional().describe('The message from the form.'),
-  comment: z.string().optional().describe('A comment from the form.'),
-  formType: z.string().describe('The type of form being submitted (e.g., "Contact Us", "Pre-Register").'),
-});
-
-export type ContactEmailInput = z.infer<typeof ContactEmailInputSchema>;
 
 export async function sendContactEmail(input: ContactEmailInput): Promise<{ success: boolean; message: string }> {
   return sendContactEmailFlow(input);
