@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Building2, Menu, Phone, Download } from 'lucide-react';
+import { Building2, Menu, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -7,6 +7,8 @@ import {
   SheetTrigger,
   SheetClose,
 } from "@/components/ui/sheet";
+import { BrochurePopup } from '@/components/features/brochure-popup';
+import { Dialog, DialogTrigger } from '../ui/dialog';
 
 const navLinks = [
     { href: '#home', label: 'Home' },
@@ -35,10 +37,15 @@ export function Header() {
           ))}
         </nav>
         <div className="flex flex-1 items-center justify-end gap-2">
-            <Button className="hidden sm:flex items-center animate-pulse">
-                <Download className="mr-2 h-4 w-4" />
-                Brochure
-            </Button>
+          <Dialog>
+              <DialogTrigger asChild>
+                <Button className="hidden sm:flex items-center animate-pulse">
+                    <Download className="mr-2 h-4 w-4" />
+                    Brochure
+                </Button>
+              </DialogTrigger>
+              <BrochurePopup />
+          </Dialog>
             <div className="lg:hidden">
                 <Sheet>
                     <SheetTrigger asChild>
@@ -55,10 +62,15 @@ export function Header() {
                                   </Link>
                                 </SheetClose>
                             ))}
-                             <Button className="w-full mt-4">
-                                <Download className="mr-2 h-4 w-4" />
-                                Brochure
-                            </Button>
+                            <Dialog>
+                               <DialogTrigger asChild>
+                                    <Button className="w-full mt-4">
+                                        <Download className="mr-2 h-4 w-4" />
+                                        Brochure
+                                    </Button>
+                               </DialogTrigger>
+                               <BrochurePopup />
+                            </Dialog>
                         </nav>
                     </SheetContent>
                 </Sheet>

@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -15,6 +15,7 @@ import { addDocumentNonBlocking } from '@/firebase/non-blocking-updates';
 import { collection } from 'firebase/firestore';
 import { Textarea } from '../ui/textarea';
 import { sendContactEmail } from '@/ai/flows/send-contact-email';
+import { useEffect, useState } from 'react';
 
 const preRegisterSchema = z.object({
   name: z.string().min(2, 'Name is required.'),
@@ -25,10 +26,26 @@ const preRegisterSchema = z.object({
 
 type PreRegisterFormValues = z.infer<typeof preRegisterSchema>;
 
+const heroImages = [
+  PlaceHolderImages.find(p => p.id === 'hero-background'),
+  PlaceHolderImages.find(p => p.id === 'gallery-1'),
+  PlaceHolderImages.find(p => p.id === 'gallery-2'),
+  PlaceHolderImages.find(p => p.id === 'gallery-5'),
+].filter(Boolean) as any[];
+
+
 export function Hero() {
   const { toast } = useToast();
-  const heroImage = PlaceHolderImages.find(p => p.id === 'hero-background');
   const { firestore } = useFirebase();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
+    }, 1500); // Change image every 1.5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   const form = useForm<PreRegisterFormValues>({
     resolver: zodResolver(preRegisterSchema),
@@ -80,16 +97,17 @@ export function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center text-white py-16 md:py-24">
-      {heroImage && (
+       {heroImages.map((image, index) => (
          <Image
-            src={heroImage.imageUrl}
-            alt={heroImage.description}
+            key={image.id}
+            src={image.imageUrl}
+            alt={image.description}
             fill
-            className="object-cover"
-            priority
-            data-ai-hint={heroImage.imageHint}
+            className={`object-cover transition-opacity duration-1000 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}
+            priority={index === 0}
+            data-ai-hint={image.imageHint}
           />
-      )}
+       ))}
       <div className="absolute inset-0 bg-black/60" />
       <div className="relative z-10 container mx-auto px-4 grid lg:grid-cols-2 gap-8 items-center">
         
