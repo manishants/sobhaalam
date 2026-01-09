@@ -121,7 +121,7 @@ export default {
         'fade-in-down': 'fade-in-down 0.5s ease-out',
         'fade-in-up': 'fade-in-up 0.5s ease-out 0.2s backwards',
       },
-      typography: (theme) => ({
+      typography: (theme: (arg0: string) => any) => ({
         DEFAULT: {
           css: {
             '--tw-prose-body': theme('colors.foreground / 80%'),
@@ -144,22 +144,31 @@ export default {
         },
         invert: {
             css: {
-                '--tw-prose-body': theme('colors.foreground / 80%'),
-                '--tw-prose-headings': theme('colors.foreground'),
-                '--tw-prose-lead': theme('colors.muted.foreground'),
-                '--tw-prose-links': theme('colors.primary'),
-                '--tw-prose-bold': theme('colors.foreground'),
-                '--tw-prose-counters': theme('colors.muted.foreground'),
-                '--tw-prose-bullets': theme('colors.border'),
-                '--tw-prose-hr': theme('colors.border'),
-                '--tw-prose-quotes': theme('colors.foreground'),
-                '--tw-prose-quote-borders': theme('colors.border'),
-                '--tw-prose-captions': theme('colors.muted.foreground'),
-                '--tw-prose-code': theme('colors.foreground'),
-                '--tw-prose-pre-code': theme('colors.foreground'),
-                '--tw-prose-pre-bg': 'hsl(var(--muted) / 50%)',
-                '--tw-prose-th-borders': theme('colors.border'),
-                '--tw-prose-td-borders': theme('colors.border'),
+                '--tw-prose-body': 'hsl(var(--foreground) / 0.8)',
+                '--tw-prose-headings': 'hsl(var(--primary))',
+                '--tw-prose-lead': 'hsl(var(--muted-foreground))',
+                '--tw-prose-links': 'hsl(var(--primary))',
+                '--tw-prose-bold': 'hsl(var(--foreground))',
+                '--tw-prose-counters': 'hsl(var(--muted-foreground))',
+                '--tw-prose-bullets': 'hsl(var(--border))',
+                '--tw-prose-hr': 'hsl(var(--border))',
+                '--tw-prose-quotes': 'hsl(var(--foreground))',
+                '--tw-prose-quote-borders': 'hsl(var(--border))',
+                '--tw-prose-captions': 'hsl(var(--muted-foreground))',
+                '--tw-prose-code': 'hsl(var(--foreground))',
+                '--tw-prose-pre-code': 'hsl(var(--foreground))',
+                '--tw-prose-pre-bg': 'hsl(var(--muted) / 0.5)',
+                '--tw-prose-th-borders': 'hsl(var(--border))',
+                '--tw-prose-td-borders': 'hsl(var(--border))',
+                h2: {
+                  fontFamily: theme('fontFamily.headline'),
+                },
+                h3: {
+                  fontFamily: theme('fontFamily.headline'),
+                },
+                h4: {
+                  fontFamily: theme('fontFamily.headline'),
+                },
             },
         },
       }),

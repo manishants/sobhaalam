@@ -4,7 +4,7 @@ export function Article() {
   return (
     <section id="article" className="py-20 md:py-28 bg-background">
       <div className="container mx-auto px-4 max-w-4xl">
-        <div className="prose prose-invert prose-headings:text-primary prose-headings:font-headline prose-a:text-primary hover:prose-a:text-primary/80 mx-auto">
+        <article className="prose prose-invert lg:prose-xl mx-auto">
           <h2>Sobha Hoskote: A Landmark Residential Development Redefining East Bengaluru</h2>
           <p>Sobha Hoskote is emerging as one of the most anticipated residential destinations in East Bengaluru, driven by infrastructure growth, seamless connectivity, and the entry of premium developers. Adding to this momentum is Sobha’s upcoming iconic project – Sobha Hoskote, a mega residential township located at OMR Road, Hoskote Toll Gate, Bengaluru, right on Old Madras Road (NH-75).</p>
           <p>Spread across an expansive 48 acres, this development is set to redefine the skyline of East Bengaluru with the tallest residential towers in the region, premium lifestyle offerings, and thoughtfully designed homes. For homebuyers and investors alike, Sobha Hoskote represents a rare opportunity to own property in a fast-growing corridor backed by the legacy and trust of Sobha Limited.</p>
@@ -157,7 +157,7 @@ export function Article() {
           <h3>Final Thoughts on Sobha Hoskote</h3>
           <p>Sobha Hoskote is no longer just an upcoming residential destination — it is shaping into one of East Bengaluru’s most promising real estate corridors. With Sobha Hoskote, Sobha Limited is introducing a landmark township that combines scale, design, connectivity, and trust.</p>
           <p>For buyers looking to secure a premium home or investors seeking long-term appreciation, this project stands out as a high-potential opportunity in Bengaluru’s evolving real estate landscape.</p>
-        </div>
+        </article>
       </div>
     </section>
   );
