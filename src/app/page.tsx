@@ -1,14 +1,13 @@
 import { Hero } from '@/components/features/hero';
 import { Overview } from '@/components/features/overview';
 import { Highlights } from '@/components/features/highlights';
-import { MasterPlan } from '@/components/features/master-plan';
-import { FloorPlans } from '@/components/features/floor-plans';
 import { Amenities } from '@/components/features/amenities';
 import { Gallery } from '@/components/features/gallery';
 import { Contact } from '@/components/features/contact';
 import { Pricing } from '@/components/features/pricing';
 import { Location } from '@/components/features/location';
 import { FloatingForm } from '@/components/features/floating-form';
+import { SiteAndFloorPlan } from '@/components/features/site-and-floor-plan';
 
 // Placeholder for Virtual Site Tour
 const VirtualTour = () => (
@@ -29,10 +28,9 @@ export default function Home() {
         <main className="overflow-x-hidden">
           <Overview />
           <Pricing />
+          <SiteAndFloorPlan />
           <Highlights />
           <Location />
-          <MasterPlan />
-          <FloorPlans />
           <Amenities />
           <Gallery />
           <VirtualTour />
