@@ -18,9 +18,9 @@ import { ContactEmailInputSchema, type ContactEmailInput } from '@/ai/schemas/co
 //    RESEND_API_KEY=your_api_key_here
 // 4. In Resend, verify the domain you want to send emails from.
 
-// Prefer environment variable; fall back to provided key to ensure delivery.
-const RESEND_API_KEY = process.env.RESEND_API_KEY || 're_K5fhaZer_LwM84ZTWWLRQc1GtMr6dvcUd';
-const resend = new Resend(RESEND_API_KEY);
+// Require RESEND_API_KEY from environment; do not hardcode secrets.
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
 
 export async function sendContactEmail(input: ContactEmailInput): Promise<{ success: boolean; message: string }> {
   return sendContactEmailFlow(input);
@@ -36,6 +36,10 @@ const sendContactEmailFlow = ai.defineFlow(
     console.log('Received form submission:', input);
 
     // Resend client initialized above; proceed with sending.
+    if (!resend) {
+      console.error('RESEND_API_KEY is not configured in the environment.');
+      return { success: false, message: 'Email service not configured.' };
+    }
     
     // Deliver to both recipients; allow env override via comma-separated list.
     const toEnv = process.env.TO_EMAIL_ADDRESS ?? '';
