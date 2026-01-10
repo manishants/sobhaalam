@@ -8,7 +8,7 @@ export async function GET() {
     .filter(Boolean);
 
   const hasResendApiKey = Boolean(process.env.RESEND_API_KEY);
-  const fromEmail = 'Sobha Leads <leads@sobhahoskote.online>';
+  const fromEmail = process.env.FROM_EMAIL_ADDRESS ?? 'Sobha Leads <leads@sobhahoskote.online>';
 
   return NextResponse.json({
     ok: true,

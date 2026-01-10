@@ -50,7 +50,7 @@ const sendContactEmailFlow = ai.defineFlow(
     // Prefer sending directly to manishants, and CC any others for reliability.
     const primaryTo = recipients.find((e) => e.toLowerCase() === 'manishants@gmail.com') ?? recipients[0];
     const ccRecipients = recipients.filter((e) => e !== primaryTo);
-    const fromEmail = 'Sobha Leads <leads@sobhahoskote.online>';
+    const fromEmail = process.env.FROM_EMAIL_ADDRESS ?? 'Sobha Leads <leads@sobhahoskote.online>';
 
     try {
       const payload = {
@@ -70,10 +70,16 @@ const sendContactEmailFlow = ai.defineFlow(
         text: `New Form Submission\nForm: ${input.formType}\nName: ${input.name}\nEmail: ${input.email}\n${input.phone ? `Phone: ${input.phone}\n` : ''}${input.message ? `Message: ${input.message}\n` : ''}${input.comment ? `Comment: ${input.comment}\n` : ''}`,
       };
 
-      await resend.emails.send({ from: fromEmail, ...payload });
+      const { data, error } = await resend.emails.send({ from: fromEmail, ...payload });
 
-      console.log('Email sent successfully!');
-      return { success: true, message: 'Email sent successfully.' };
+      if (error) {
+        const errMsg = error.message ?? 'Unknown error';
+        console.error('Resend returned error:', errMsg);
+        return { success: false, message: `Failed to send email: ${errMsg}` };
+      }
+
+      console.log('Email sent successfully!', data?.id ? `id=${data.id}` : '');
+      return { success: true, message: `Email sent successfully${data?.id ? ` (id: ${data.id})` : ''}.` };
 
     } catch (error) {
       const errMsg = error instanceof Error ? error.message : String(error);
