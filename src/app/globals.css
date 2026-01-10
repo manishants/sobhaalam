@@ -54,9 +54,9 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
+    @apply bg-background text-foreground;
   }
   html {
-    @apply overflow-x-hidden;
+    /* Remove global overflow clipping to avoid cutting off content on mobile */
   }
 }

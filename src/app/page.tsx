@@ -18,7 +18,7 @@ export default function Home() {
     <div className="flex">
       <div className="flex-grow lg:mr-96">
         <Hero />
-        <main className="overflow-x-hidden">
+        <main>
           <Overview />
           <Pricing />
           <SiteAndFloorPlan />
