@@ -38,7 +38,7 @@ const sendContactEmailFlow = ai.defineFlow(
     // Resend client initialized above; proceed with sending.
     if (!resend) {
       console.error('RESEND_API_KEY is not configured in the environment.');
-      return { success: false, message: 'Email service not configured.' };
+      return { success: false, message: 'Email service not configured. Set RESEND_API_KEY in production.' };
     }
     
     // Deliver to both recipients; allow env override via comma-separated list.
@@ -76,9 +76,10 @@ const sendContactEmailFlow = ai.defineFlow(
       return { success: true, message: 'Email sent successfully.' };
 
     } catch (error) {
-      console.error('Failed to send email:', error);
-      // Treat as failure so UI can reflect issue.
-      return { success: false, message: 'Failed to send email.' };
+      const errMsg = error instanceof Error ? error.message : String(error);
+      console.error('Failed to send email:', errMsg);
+      // Include error reason to aid production triage (no secrets leaked).
+      return { success: false, message: `Failed to send email: ${errMsg}` };
     }
   }
 );
