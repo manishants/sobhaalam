@@ -29,6 +29,7 @@ const navLinks = [
 export function Header() {
   const [activeLink, setActiveLink] = useState('#home');
   const [isScrolled, setIsScrolled] = useState(false);
+  const [autoOpen, setAutoOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,6 +54,43 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [activeLink]);
 
+  // Auto-open brochure popup on load, exit intent, tab switch, and after 60s
+  useEffect(() => {
+    // Show on initial visit
+    setAutoOpen(true);
+
+    const handleMouseOut = (e: MouseEvent) => {
+      // Exit intent: mouse leaves viewport at top
+      if ((e.relatedTarget === null || (e as any).toElement === null) && e.clientY <= 0) {
+        setAutoOpen(true);
+      }
+    };
+
+    const handleBlur = () => {
+      // Tab switch intent
+      setAutoOpen(true);
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        setAutoOpen(true);
+      }
+    };
+
+    window.addEventListener('mouseout', handleMouseOut);
+    window.addEventListener('blur', handleBlur);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    const timer = setTimeout(() => setAutoOpen(true), 60000);
+
+    return () => {
+      window.removeEventListener('mouseout', handleMouseOut);
+      window.removeEventListener('blur', handleBlur);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      clearTimeout(timer);
+    };
+  }, []);
+
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
@@ -64,7 +102,7 @@ export function Header() {
       <div className="container flex h-16 items-center mx-auto px-4">
         <Link href="/" className="flex items-center gap-2 mr-6">
           <img src="/images/sobha-logo.png" alt="SOBHA logo" className="h-10 w-auto" />
-          <span className="font-bold text-xl font-headline text-foreground hidden sm:inline">Hoskote</span>
+          <h1 className="font-bold text-xl md:text-2xl font-headline text-foreground">Sobha Hoskote</h1>
         </Link>
         <nav className="hidden lg:flex items-center space-x-4 text-sm font-medium">
           {navLinks.map(link => (
@@ -74,6 +112,10 @@ export function Header() {
           ))}
         </nav>
         <div className="flex flex-1 items-center justify-end gap-2">
+          {/* Auto-open controlled dialog */}
+          <Dialog open={autoOpen} onOpenChange={setAutoOpen}>
+            <BrochurePopup />
+          </Dialog>
           <Dialog>
               <DialogTrigger asChild>
                 <Button className="hidden sm:flex items-center">

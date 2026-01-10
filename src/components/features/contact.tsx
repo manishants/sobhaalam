@@ -5,7 +5,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
@@ -20,8 +19,7 @@ import { BrochurePopup } from './brochure-popup';
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters.'),
   email: z.string().email('Invalid email address.'),
-  phone: z.string().optional(),
-  message: z.string().min(10, 'Message must be at least 10 characters.'),
+  phone: z.string().min(10, 'Valid mobile number is required.'),
 });
 
 type ContactFormValues = z.infer<typeof contactSchema>;
@@ -32,7 +30,7 @@ export function Contact() {
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
-    defaultValues: { name: '', email: '', phone: '', message: '' },
+    defaultValues: { name: '', email: '', phone: '' },
   });
 
   const { formState: { isSubmitting } } = form;
@@ -130,29 +128,16 @@ export function Contact() {
                               name="phone"
                               render={({ field }) => (
                                 <FormItem>
-                                  <FormLabel>Phone Number (Optional)</FormLabel>
+                                  <FormLabel>Mobile Number</FormLabel>
                                   <FormControl>
-                                    <Input placeholder="+1 234 567 890" {...field} />
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
-                              )}
-                            />
-                            <FormField
-                              control={form.control}
-                              name="message"
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>Your Message</FormLabel>
-                                  <FormControl>
-                                    <Textarea placeholder="Tell us how we can help..." {...field} rows={5} />
+                                    <Input type="tel" placeholder="Mobile No*" {...field} />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
                               )}
                             />
                             <Button type="submit" disabled={isSubmitting} className="w-full font-bold text-lg">
-                              {isSubmitting ? 'Sending...' : 'Send Message'}
+                              {isSubmitting ? 'Submitting...' : 'Submit'}
                             </Button>
                           </form>
                         </Form>

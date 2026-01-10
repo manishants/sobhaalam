@@ -4,8 +4,8 @@ export function Article() {
   return (
     <section id="article" className="py-20 md:py-28 bg-background">
       <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-3">
+        <div className="w-full">
+          <div>
             <header className="mb-8">
               <h2 className="font-headline text-3xl md:text-4xl">
                 Sobha Hoskote: A Landmark Residential Development Redefining East Bengaluru
@@ -198,23 +198,7 @@ export function Article() {
               </p>
             </article>
           </div>
-          <aside className="lg:col-span-1 lg:sticky lg:top-24 self-start border border-border rounded-lg p-4 bg-card">
-            <p className="font-headline text-sm mb-2 text-foreground">On this page</p>
-            <nav className="space-y-2 text-sm">
-              <a href="#why-sobha-hoskote" className="block hover:text-primary">Why Sobha Hoskote</a>
-              <a href="#project-overview" className="block hover:text-primary">Project Overview</a>
-              <a href="#apartment-configurations" className="block hover:text-primary">Apartment Configurations</a>
-              <a href="#pricing" className="block hover:text-primary">Pricing &amp; EOI</a>
-              <a href="#retail-commercial" className="block hover:text-primary">Retail &amp; Commercial</a>
-              <a href="#location-advantages" className="block hover:text-primary">Location Advantages</a>
-              <a href="#amenities" className="block hover:text-primary">Amenities</a>
-              <a href="#sobha-limited" className="block hover:text-primary">Sobha Limited</a>
-              <a href="#end-users-investors" className="block hover:text-primary">End-Users &amp; Investors</a>
-              <a href="#growth-outlook" className="block hover:text-primary">Future Growth</a>
-              <a href="#final-thoughts" className="block hover:text-primary">Final Thoughts</a>
-            </nav>
-          </aside>
-        </div>
+          </div>
       </div>
     </section>
   );
