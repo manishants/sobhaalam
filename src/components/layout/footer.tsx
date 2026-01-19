@@ -8,10 +8,14 @@ export function Footer() {
       <div className="container mx-auto px-4 py-8">
         <div className="text-center text-muted-foreground text-xs space-y-4">
           <p>Disclaimer: The content provided on this website is for informational purposes only and does not constitute an offer or solicitation. This is not an official website of Sobha Limited. All images are for illustrative purposes and may not be to scale. The company reserves the right to make changes to the project specifications, amenities, and features without prior notice. Please verify all details with our sales team.</p>
-          <div className="flex justify-center gap-4">
-            <Link href="#" className="hover:text-primary">Privacy Policy</Link>
+          <div className="flex justify-center flex-wrap gap-4">
+            <Link href="/about" className="hover:text-primary">About Us</Link>
             <span>|</span>
-            <Link href="#" className="hover:text-primary">Terms of Use</Link>
+            <Link href="/contact" className="hover:text-primary">Contact Us</Link>
+            <span>|</span>
+            <Link href="/privacy-policy" className="hover:text-primary">Privacy Policy</Link>
+            <span>|</span>
+            <Link href="/disclaimer" className="hover:text-primary">Disclaimer</Link>
           </div>
           <p>&copy; {currentYear} Sobha Hoskote. All rights reserved.</p>
         </div>

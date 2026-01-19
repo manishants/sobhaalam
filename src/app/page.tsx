@@ -12,6 +12,7 @@ import { SiteAndFloorPlan } from '@/components/features/site-and-floor-plan';
 import { VirtualTour } from '@/components/features/virtual-tour';
 import { Faq } from '@/components/features/faq';
 import { Article } from '@/components/features/article';
+import { SeoLinks } from '@/components/features/seo-links';
 
 export default function Home() {
   return (
@@ -27,6 +28,7 @@ export default function Home() {
           <Gallery />
           <VirtualTour />
           <Article />
+          <SeoLinks />
           <Faq />
           <Contact />
         </main>
