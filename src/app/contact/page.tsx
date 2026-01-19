@@ -1,5 +1,3 @@
-'use client';
-
 import type { Metadata } from 'next';
 import { Contact } from '@/components/features/contact';
 
