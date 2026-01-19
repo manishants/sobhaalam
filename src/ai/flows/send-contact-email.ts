@@ -41,16 +41,23 @@ const sendContactEmailFlow = ai.defineFlow(
       return { success: false, message: 'Email service not configured. Set RESEND_API_KEY in production.' };
     }
     
-    // Deliver to both recipients; allow env override via comma-separated list.
+    // Resolve recipients strictly from environment; no hardcoded fallbacks.
     const toEnv = process.env.TO_EMAIL_ADDRESS ?? '';
-    const toListFromEnv = toEnv.split(',').map((e) => e.trim()).filter(Boolean);
-    const defaultRecipients = ['glenmoreventures2026@gmail.com', 'manishants@gmail.com'];
-    const recipients = toListFromEnv.length > 0 ? toListFromEnv : defaultRecipients;
+    const recipients = toEnv.split(',').map((e) => e.trim()).filter(Boolean);
+    if (recipients.length === 0) {
+      console.error('TO_EMAIL_ADDRESS is not configured in the environment.');
+      return { success: false, message: 'Email recipients not configured. Set TO_EMAIL_ADDRESS in production.' };
+    }
 
-    // Prefer sending directly to manishants, and CC any others for reliability.
-    const primaryTo = recipients.find((e) => e.toLowerCase() === 'manishants@gmail.com') ?? recipients[0];
-    const ccRecipients = recipients.filter((e) => e !== primaryTo);
-    const fromEmail = process.env.FROM_EMAIL_ADDRESS ?? 'Sobha Leads <leads@sobhahoskote.online>';
+    const primaryTo = recipients[0];
+    const ccRecipients = recipients.slice(1);
+
+    // Sender must be provided via env and verified in Resend.
+    const fromEmail = process.env.FROM_EMAIL_ADDRESS;
+    if (!fromEmail) {
+      console.error('FROM_EMAIL_ADDRESS is not configured in the environment.');
+      return { success: false, message: 'Sender not configured. Set FROM_EMAIL_ADDRESS in production.' };
+    }
 
     try {
       const payload = {
